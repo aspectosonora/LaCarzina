@@ -1,0 +1,2647 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>La Carzina - Asadero y Cocina - Pedidos por WhatsApp</title>
+<meta name="description" content="Menu digital de La Carzina en Ciudad Obregon. Guisados, caldos, paquetes y platillos. Pide directo por WhatsApp.">
+<link rel="icon" type="image/png" href="LA%20CARZINA%20ICONO.png">
+<link rel="apple-touch-icon" href="LA%20CARZINA%20ICONO.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#0c673c; --verde-osc:#064827; --oro:#f4b12a; --crema:#f7f4e8;
+    --blanco:#fff; --texto:#1c2a22; --muted:#6b7a6f; --linea:#e7e2d2;
+    --sombra:0 10px 30px rgba(6,72,39,.10),0 2px 6px rgba(6,72,39,.06);
+    --radio:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{font-family:'Poppins',system-ui,sans-serif;color:var(--texto);background:var(--verde-osc)}
+  body{min-height:100vh;background:radial-gradient(circle at 12% 18%,rgba(244,177,42,.15) 0 8px,transparent 9px) 0 0/40px 40px,var(--verde-osc)}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  a{color:inherit;text-decoration:none}
+  input,select,textarea{font-family:inherit;font-size:15px;width:100%;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;background:#fff;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--verde)}
+  textarea{min-height:76px;resize:vertical}
+  label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#2a3a30}
+  .wrap{max-width:480px;margin:0 auto;background:var(--crema);min-height:100vh;box-shadow:0 0 60px rgba(0,0,0,.35);position:relative;overflow-x:hidden;padding-top:62px}
+  .hdr{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:500;background:var(--verde);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  .hdr .logo{width:42px;height:42px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:4px;flex:0 0 42px}
+  .hdr .logo img{width:100%;height:100%;object-fit:contain}
+  .hdr h1{font-size:16px;line-height:1;font-weight:800}
+  .hdr p{font-size:11px;opacity:.9;color:var(--oro)}
+  .hdr .grow{flex:1}
+  .cart-btn{position:relative;background:var(--oro);color:#3a2a00;padding:8px 12px;border-radius:30px;font-weight:800;font-size:13px;display:flex;align-items:center;gap:6px}
+  .cart-btn .badge{background:#b33;color:#fff;border-radius:20px;padding:2px 7px;font-size:11px;min-width:20px;text-align:center}
+  .hero{position:relative;color:#fff;padding:28px 18px 30px;background:linear-gradient(180deg,rgba(6,72,39,.78),rgba(6,72,39,.94)),url('Chamaroo.png') center/cover;text-align:center;overflow:hidden}
+  .hero:before,.hero:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,var(--oro),transparent 65%);opacity:.18}
+  .hero:before{top:-40px;left:-40px}
+  .hero:after{bottom:-50px;right:-50px}
+  .hero .logo-big{width:min(360px,92%);margin:0 auto 14px;position:relative;z-index:1}
+  .hero h2{font-size:26px;line-height:1.15;font-weight:800;margin-bottom:8px;position:relative;z-index:1}
+  .hero p{font-size:14px;opacity:.92;margin-bottom:18px;position:relative;z-index:1}
+  .hero .ctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:30px;font-weight:800;font-size:14px;transition:transform .15s}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--oro);color:#3a2a00}
+  .btn-ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .btn-verde{background:var(--verde);color:#fff}
+  .btn-light{background:var(--crema);color:var(--verde-osc);border:1px solid var(--linea)}
+  .btn-danger{background:#b33;color:#fff}
+  .btn-block{width:100%}
+  section{padding:22px 14px}
+  .sec-head{margin-bottom:14px}
+  .sec-head h3{font-size:20px;font-weight:800;color:var(--verde-osc)}
+  .sec-head p{font-size:13px;color:var(--muted);margin-top:4px}
+  .chip{display:inline-block;background:var(--oro);color:#3a2a00;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:800;margin-bottom:8px}
+  .chip.green{background:var(--verde);color:#fff}
+  .day-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none;margin-bottom:8px}
+  .day-tabs::-webkit-scrollbar{display:none}
+  .day-tabs button{flex:0 0 auto;padding:8px 14px;border-radius:30px;background:#fff;color:var(--muted);font-size:13px;font-weight:700;border:1px solid var(--linea);white-space:nowrap}
+  .day-tabs button.active{background:var(--verde);color:#fff;border-color:var(--verde);box-shadow:0 4px 10px rgba(12,103,60,.2)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card,.panel,.pkg,.find,.track{background:#fff;border-radius:var(--radio);box-shadow:var(--sombra)}
+  .card{overflow:hidden;display:flex;flex-direction:column}
+  .card .ph{aspect-ratio:4/3;background:linear-gradient(135deg,#0c673c,#f4b12a);position:relative;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover}
+  .card .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card h4{font-size:14px;font-weight:800;line-height:1.2}
+  .card p,.card .prices{font-size:12px;color:var(--muted)}
+  .card .prices b{color:var(--verde-osc);font-size:13px}
+  .card .add{margin-top:auto;background:var(--verde);color:#fff;padding:8px;border-radius:10px;font-weight:700;font-size:13px}
+  .pkg{overflow:hidden;margin-bottom:14px;position:relative}
+  .pkg .ph{aspect-ratio:16/9;background:#ddd;position:relative}
+  .pkg .ph img{width:100%;height:100%;object-fit:cover}
+  .pkg .tag{position:absolute;top:10px;left:10px;background:var(--oro);color:#3a2a00;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:800}
+  .pkg .body{padding:14px}
+  .pkg h4{font-size:18px;font-weight:800;color:var(--verde-osc)}
+  .pkg .price{font-size:22px;font-weight:800;color:var(--verde);margin:4px 0}
+  .pkg ul{list-style:none;font-size:13px;color:var(--muted);margin:6px 0 12px}
+  .pkg ul li{padding:2px 0;display:flex;gap:6px}
+  .pkg ul li:before{content:"•";color:var(--oro);font-weight:800}
+  .panel{padding:14px;margin-bottom:14px}
+  .panel h4{font-size:17px;font-weight:800;color:var(--verde-osc);margin-bottom:8px}
+  .price-row{display:flex;gap:8px;margin:10px 0}
+  .price-row button{flex:1;border:1px solid var(--linea);border-radius:12px;padding:10px;background:var(--crema);font-weight:800;color:var(--verde-osc)}
+  .price-row button.active,.price-row button:hover{background:var(--verde);color:#fff;border-color:var(--verde)}
+  .muted{color:var(--muted);font-size:12px}
+  .warning{color:#b33;font-size:12px;font-weight:700;margin-top:6px}
+  .caldo{background:linear-gradient(135deg,#fff7e0,#fff);border:2px solid var(--oro);border-radius:var(--radio);padding:16px;text-align:center;box-shadow:var(--sombra)}
+  .caldo .ph{border-radius:14px;overflow:hidden;aspect-ratio:16/8;margin-bottom:12px}
+  .caldo .ph img{width:100%;height:100%;object-fit:cover}
+  .caldo h4{font-size:20px;font-weight:800;color:var(--verde-osc)}
+  .caldo p{font-size:12px;color:var(--muted);margin:4px 0 12px}
+  .share-card{text-align:left}
+  .share-card h4,.share-card p{text-align:center}
+  .share-card .ph{border-radius:14px;overflow:hidden;aspect-ratio:16/8;margin-bottom:12px}
+  .share-card .ph img{width:100%;height:100%;object-fit:cover}
+  .today-card{background:linear-gradient(135deg,#fffaf0,#fff);border:2px solid rgba(244,177,42,.65);border-radius:var(--radio);padding:14px;box-shadow:var(--sombra);margin-bottom:14px}
+  .today-card .cover{border-radius:14px;overflow:hidden;aspect-ratio:16/8;margin-bottom:12px}
+  .today-card .cover img{width:100%;height:100%;object-fit:cover}
+  .today-card .headrow{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+  .today-card h4{font-size:19px;font-weight:800;color:var(--verde-osc);line-height:1.15}
+  .today-card .updated{font-size:11px;color:var(--muted);font-weight:700}
+  .today-msg{background:#f8f4e4;border:1px dashed #d8bd70;border-radius:12px;padding:9px;font-size:12px;color:#5a4818;margin:8px 0}
+  .menu-search{margin:10px 0}
+  .product-list{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+  .product-mini{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:12px;box-shadow:0 4px 14px rgba(6,72,39,.05)}
+  .product-mini .top{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+  .product-mini h5{font-size:14px;font-weight:800;color:var(--verde-osc);line-height:1.2}
+  .product-mini p{font-size:12px;color:var(--muted);margin-top:3px}
+  .product-mini .code{font-size:10px;color:var(--muted);font-weight:800;margin-top:2px}
+  .product-mini .prices{font-size:12px;color:var(--muted);margin:8px 0}
+  .product-mini .prices b{color:var(--verde-osc)}
+  .product-mini .acts{display:flex;gap:8px;flex-wrap:wrap}
+  .product-mini .acts .btn{flex:1;padding:9px 10px;font-size:12px;min-width:115px}
+  .status-badge{display:inline-flex;align-items:center;border-radius:20px;padding:3px 8px;font-size:10px;font-weight:800;white-space:nowrap;background:#eef7f1;color:var(--verde)}
+  .status-badge.sold{background:#ffe7e7;color:#b33}
+  .status-badge.star{background:var(--oro);color:#3a2a00}
+  .no-menu{background:#fff;border-radius:var(--radio);box-shadow:var(--sombra);padding:18px;text-align:center}
+  .no-menu h4{font-size:18px;color:var(--verde-osc);font-weight:800}
+  .no-menu p{font-size:13px;color:var(--muted);margin:8px 0 12px}
+  .antojo{background:#fff;border-radius:14px;padding:10px;display:flex;align-items:center;gap:10px;box-shadow:var(--sombra);margin-bottom:10px}
+  .antojo .ico{width:46px;height:46px;border-radius:10px;background:var(--crema);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--verde);flex:0 0 46px}
+  .antojo .info{flex:1;min-width:0}
+  .antojo h5{font-size:14px;font-weight:800}
+  .antojo .pp{font-size:12px;color:var(--verde);font-weight:800}
+  .qty{display:flex;align-items:center;gap:6px}
+  .qty button{width:30px;height:30px;border-radius:8px;background:var(--crema);color:var(--verde-osc);font-weight:800;font-size:16px;border:1px solid var(--linea)}
+  .qty span{min-width:20px;text-align:center;font-weight:800}
+  .cart-sheet{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+  .cart-sheet.open{display:flex}
+  .cart-inner{background:#fff;width:100%;max-width:480px;max-height:92vh;border-radius:24px 24px 0 0;display:flex;flex-direction:column;overflow:hidden}
+  .cart-head{padding:14px 16px;border-bottom:1px solid var(--linea);display:flex;align-items:center;gap:10px}
+  .cart-head h3{flex:1;font-size:18px;font-weight:800;color:var(--verde-osc)}
+  .cart-head button{font-size:22px;color:var(--muted)}
+  .cart-list{flex:1;overflow-y:auto;padding:12px 16px}
+  .cart-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--linea)}
+  .cart-item .ci-info{flex:1;min-width:0}
+  .cart-item h5{font-size:14px;font-weight:800}
+  .cart-item .meta{font-size:12px;color:var(--muted);margin-top:2px;white-space:pre-line}
+  .cart-item .row{display:flex;align-items:center;gap:10px;margin-top:8px}
+  .cart-item .price{font-weight:800;color:var(--verde)}
+  .cart-item .rm{color:#b33;font-size:12px;font-weight:700}
+  .cart-foot{padding:14px 16px;border-top:1px solid var(--linea);background:#fff}
+  .cart-foot .totals{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:13px}
+  .cart-foot .totals .row{display:flex;justify-content:space-between}
+  .cart-foot .totals .total{font-size:18px;font-weight:800;color:var(--verde-osc)}
+  .empty{text-align:center;padding:28px 10px;color:var(--muted)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .form-grid .full{grid-column:1/-1}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:center;justify-content:center;padding:14px}
+  .modal.open{display:flex}
+  .modal-inner{background:#fff;width:100%;max-width:440px;border-radius:20px;max-height:90vh;overflow-y:auto}
+  .modal-head{padding:14px 16px;border-bottom:1px solid var(--linea);display:flex;align-items:center;gap:10px;position:sticky;top:0;background:#fff;z-index:2}
+  .modal-head h3{flex:1;font-size:17px;font-weight:800;color:var(--verde-osc)}
+  .modal-head button.x{font-size:24px;color:var(--muted)}
+  .modal-body{padding:16px}
+  .modal-foot{padding:12px 16px;border-top:1px solid var(--linea);display:flex;gap:8px;position:sticky;bottom:0;background:#fff}
+  .modal-foot.wrap-actions{flex-wrap:wrap}
+  .modal-foot.wrap-actions .btn{flex:1 1 calc(50% - 8px);min-width:150px}
+  .ticket-receipt{background:#fff;border:2px dotted #c8c8c8;border-radius:14px;padding:18px 16px;color:#111;font-family:"Courier New",Consolas,monospace;box-shadow:0 10px 28px rgba(0,0,0,.08)}
+  .ticket-receipt .tk-center{text-align:center}
+  .ticket-receipt .tk-brand{font-size:20px;font-weight:800;letter-spacing:.5px}
+  .ticket-receipt .tk-sub{font-size:12px;line-height:1.35}
+  .ticket-receipt .tk-line{border-top:1px dashed #b8b8b8;margin:12px 0}
+  .ticket-receipt .tk-label{font-size:11px;text-transform:uppercase;color:#555;font-weight:800;margin-top:8px}
+  .ticket-receipt .tk-value{font-size:14px;line-height:1.35;word-break:break-word}
+  .ticket-receipt .tk-product{padding:10px 0;border-bottom:1px dashed #d0d0d0}
+  .ticket-receipt .tk-product:last-of-type{border-bottom:0}
+  .ticket-receipt .tk-product h4{font-family:inherit;font-size:15px;font-weight:800;color:#111;margin:0 0 3px;text-transform:uppercase}
+  .ticket-receipt .tk-price{font-size:16px;font-weight:800;margin-bottom:4px}
+  .ticket-receipt .tk-meta{font-size:12px;line-height:1.35;color:#333;white-space:pre-line}
+  .ticket-receipt .tk-total{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:12px;font-size:24px;font-weight:800}
+  .ticket-receipt .tk-foot{font-size:12px;line-height:1.35;margin-top:12px;text-align:center}
+  .ticket-hint{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
+  .ub-sec{border:1px solid var(--linea);border-radius:14px;margin-bottom:12px;background:#fff;overflow:hidden}
+  .ub-sec .head{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#fafafa;border-bottom:1px solid var(--linea)}
+  .ub-sec .head .ttl{flex:1}
+  .ub-sec .head .ttl b{display:block;font-size:14px;color:var(--verde-osc);font-weight:800}
+  .ub-sec .head .ttl small{font-size:11px;color:var(--muted)}
+  .ub-sec .head .tag{font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px}
+  .ub-sec .head .tag.req{background:#fff0e0;color:#b35900}
+  .ub-sec .head .tag.ok{background:var(--verde);color:#fff}
+  .ub-body{padding:10px 12px 14px}
+  .ub-row{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--linea)}
+  .ub-row:last-child{border-bottom:0}
+  .ub-row .nm{flex:1;font-size:14px;font-weight:700;color:var(--texto)}
+  .ub-row input[type=radio],.ub-row input[type=checkbox]{width:22px;height:22px;accent-color:var(--verde);cursor:pointer}
+  .extra-group{margin-bottom:12px}
+  .extra-group h5{font-size:13px;color:var(--verde-osc);font-weight:800;margin:4px 0 2px}
+  .step-actions{display:flex;gap:8px;margin-top:10px}
+  .step-actions .btn{flex:1}
+  .track{padding:14px;margin-bottom:14px}
+  .track h4{font-size:14px;font-weight:800;color:var(--verde-osc);margin-bottom:10px}
+  .steps{display:flex;align-items:center;gap:4px}
+  .steps .s{flex:1;text-align:center}
+  .steps .dot{width:28px;height:28px;border-radius:50%;background:#e5e5e5;color:#999;display:flex;align-items:center;justify-content:center;font-weight:800;margin:0 auto 4px;font-size:13px}
+  .steps .s.active .dot{background:var(--verde);color:#fff;animation:pulse 1.5s infinite}
+  .steps .s.done .dot{background:var(--oro);color:#3a2a00}
+  .steps .s p{font-size:10px;color:var(--muted)}
+  .steps .bar{height:3px;background:#e5e5e5;flex:0 0 14px;border-radius:3px}
+  .steps .bar.done{background:var(--oro)}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(12,103,60,.5)}50%{box-shadow:0 0 0 8px rgba(12,103,60,0)}}
+  .hist-item{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:var(--sombra);margin-bottom:8px;display:flex;align-items:center;gap:10px;font-size:13px}
+  .hist-item .f{font-weight:800;color:var(--verde)}
+  .hist-item .est{margin-left:auto;font-size:11px;background:var(--crema);padding:3px 8px;border-radius:10px;color:var(--verde-osc);font-weight:700}
+  .hist-panel{margin-top:10px}
+  .hist-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .hist-head .txt{flex:1;min-width:0}
+  .hist-head h4{font-size:15px;font-weight:800;color:var(--verde-osc);line-height:1.1}
+  .hist-head p{font-size:12px;color:var(--muted);margin-top:2px}
+  .hist-toggle{background:#fff;color:var(--verde);border:1px solid var(--linea);border-radius:20px;padding:8px 14px;font-size:12px;font-weight:800;box-shadow:var(--sombra)}
+  .hist-list{max-height:315px;overflow-y:auto;padding:2px 4px 4px;scrollbar-width:thin}
+  .hist-list.closed{display:none}
+  .hist-list .current-order{margin-bottom:10px}
+  .hist-list .current-order:last-child{margin-bottom:0}
+  .hist-more{font-size:11px;text-align:center;color:var(--muted);padding:8px 0 2px;font-weight:700}
+  .current-order{background:#fff;border-radius:var(--radio);box-shadow:var(--sombra);padding:14px}
+  .current-order h4{font-size:16px;font-weight:800;color:var(--verde-osc);margin-bottom:8px}
+  .current-order ul{list-style:none;margin:0 0 10px}
+  .current-order li{font-size:13px;padding:4px 0;border-bottom:1px dashed var(--linea)}
+  .current-order li:last-child{border-bottom:0}
+  .current-order .sum{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:800;margin-bottom:10px}
+  .login-strip{margin:14px;background:#fff;border-radius:16px;box-shadow:var(--sombra);padding:12px;display:flex;align-items:center;gap:10px;border:1px solid var(--linea)}
+  .login-strip .ic{width:42px;height:42px;border-radius:12px;background:var(--verde);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 42px}
+  .login-strip .txt{flex:1;min-width:0}
+  .login-strip h3{font-size:15px;font-weight:800;color:var(--verde-osc);line-height:1.1}
+  .login-strip p{font-size:12px;color:var(--muted);margin-top:2px}
+  .login-strip .acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .login-strip .acts .btn{padding:9px 12px;font-size:12px}
+  .club-popup{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:700;display:none;align-items:center;justify-content:center;padding:18px}
+  .club-popup.open{display:flex}
+  .club-popup-card{width:min(90vw,760px);max-height:90vh;background:var(--verde);border-radius:22px;overflow:hidden;position:relative;box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(244,177,42,.55)}
+  .club-popup-card .close{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:23px;z-index:2}
+  .club-popup-card img{width:100%;height:auto;max-height:62vh;object-fit:cover}
+  .club-popup-card .content{padding:14px;background:linear-gradient(135deg,rgba(6,72,39,.98),rgba(12,103,60,.94))}
+  .club-popup-card .btn{box-shadow:0 8px 18px rgba(244,177,42,.25)}
+  .points-card{background:#fff;border-radius:var(--radio);box-shadow:var(--sombra);padding:16px}
+  .points-card h4{font-size:18px;font-weight:800;color:var(--verde-osc);margin-bottom:6px}
+  .points-card .big{font-size:30px;font-weight:800;color:var(--verde);line-height:1}
+  .points-card .bar{height:10px;border-radius:20px;background:var(--linea);overflow:hidden;margin:10px 0 6px}
+  .points-card .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--verde),var(--oro));border-radius:20px}
+  .points-card .acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .points-card .acts .btn{flex:1;min-width:130px}
+  .reward-row{border:1px solid var(--linea);border-radius:14px;padding:12px;margin-bottom:10px;background:#fff}
+  .reward-row .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+  .reward-row b{color:var(--verde-osc)}
+  .reward-row small{display:block;color:var(--muted);margin-top:3px}
+  .reward-row .btn{margin-top:10px;width:100%}
+  .club-note{margin-top:10px;padding:10px;border-radius:12px;background:#f8f4e4;border:1px dashed #d8bd70;font-size:12px;line-height:1.35}
+  .find{padding:16px}
+  .find .row{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--linea);font-size:13px}
+  .find .row:last-of-type{border:0}
+  .find .row .ic{font-weight:800;color:var(--verde);flex:0 0 24px}
+  .map-box{margin-top:12px;border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#dde}
+  .map-box iframe{width:100%;height:100%;border:0}
+  .social{display:flex;gap:10px;margin-top:12px;justify-content:center}
+  .social a{width:52px;height:52px;border-radius:16px;font-weight:800;font-size:0;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--sombra)}
+  .social a span{font-size:24px;line-height:1}
+  .social .wa span{font-size:22px}
+  .social .fb{background:#1877f2}
+  .social .ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+  .social .wa{background:#25d366}
+  footer{background:var(--verde-osc);color:#fff;padding:22px 14px;text-align:center}
+  footer img{width:80px;margin:0 auto 8px;opacity:.95}
+  footer h4{font-size:16px;font-weight:800}
+  footer p{font-size:12px;opacity:.85;margin:4px 0}
+  .copy{margin-top:14px;font-size:11px;opacity:.7;cursor:pointer}
+  .powered{margin-top:8px;font-size:10px;opacity:.58;letter-spacing:.12em;font-weight:800}
+  .admin-link{margin-top:8px;font-size:11px;opacity:.7;text-decoration:underline;cursor:pointer}
+  .fab{position:fixed;bottom:18px;right:18px;background:#25d366;color:#fff;padding:12px 18px;border-radius:30px;font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(37,211,102,.45);z-index:100}
+  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--verde-osc);color:#fff;padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;z-index:500;opacity:0;transition:.3s;pointer-events:none;max-width:90%;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .admin{position:fixed;inset:0;background:var(--crema);z-index:1000;display:none;flex-direction:column;overflow:hidden}
+  .admin.open{display:flex}
+  .admin-hdr{background:var(--verde-osc);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+  .admin-hdr h2{flex:1;font-size:16px;font-weight:800}
+  .admin-hdr button{background:rgba(255,255,255,.15);color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+  .admin-tabs{display:flex;overflow-x:auto;background:#fff;border-bottom:1px solid var(--linea);scrollbar-width:none}
+  .admin-tabs::-webkit-scrollbar{display:none}
+  .admin-tabs button{padding:12px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+  .admin-tabs button.active{color:var(--verde);border-color:var(--verde)}
+  .admin-body{flex:1;overflow-y:auto;padding:16px}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  .stat{background:#fff;padding:14px;border-radius:14px;box-shadow:var(--sombra)}
+  .stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .stat .val{font-size:22px;font-weight:800;color:var(--verde-osc);margin-top:4px}
+  .menu-edit{display:grid;grid-template-columns:24px 1fr 62px 62px 74px;gap:7px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--linea);font-size:12px}
+  .menu-edit input[type=number]{padding:7px 5px;font-size:12px;text-align:center}
+  .menu-edit input[type=checkbox]{width:auto}
+  .menu-edit .nm{font-weight:700;min-width:0}
+  .catalog-row{border:1px solid var(--linea);border-radius:12px;margin-bottom:10px;background:#fff;overflow:hidden}
+  .catalog-row summary{list-style:none;cursor:pointer;padding:11px 12px;display:flex;align-items:center;gap:10px}
+  .catalog-row summary::-webkit-details-marker{display:none}
+  .catalog-row summary:after{content:'+';margin-left:auto;width:26px;height:26px;border-radius:8px;background:var(--crema);display:flex;align-items:center;justify-content:center;color:var(--verde-osc);font-size:18px;font-weight:800}
+  .catalog-row[open] summary:after{content:'-'}
+  .catalog-row .cat-title{flex:1;min-width:0}
+  .catalog-row .cat-title b{display:block;color:var(--verde-osc);font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .catalog-row .cat-title small{display:block;color:var(--muted);font-size:10px;font-weight:700;margin-top:2px}
+  .catalog-row .cat-badges{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+  .catalog-row .cat-badges span{font-size:10px;font-weight:800;border-radius:999px;padding:3px 7px;background:#eef7f1;color:var(--verde)}
+  .catalog-row .cat-badges .muted{background:var(--crema);color:var(--muted)}
+  .catalog-row .cat-badges .sold{background:#ffe7e7;color:#b33}
+  .catalog-row .cat-edit{padding:0 10px 10px}
+  .catalog-row .cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .catalog-row .cols .full{grid-column:1/-1}
+  .catalog-row input,.catalog-row select,.catalog-row textarea{padding:8px;font-size:12px;border-radius:9px}
+  .mini-label{font-size:10px;color:var(--muted);font-weight:700;margin:0;text-align:center}
+  .order-row{background:#fff;border-radius:12px;padding:12px;box-shadow:var(--sombra);margin-bottom:10px}
+  .order-row .top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .order-row .top b{color:var(--verde);font-weight:800}
+  .order-row .top .est{margin-left:auto;font-size:11px;padding:3px 8px;border-radius:10px;background:var(--crema);font-weight:700}
+  .order-row .info{font-size:12px;color:var(--muted);margin-bottom:6px;white-space:pre-line}
+  .order-row .acts{display:flex;gap:6px;flex-wrap:wrap}
+  .order-row .acts select,.order-row .acts button{font-size:11px;padding:6px 10px;border-radius:8px;background:var(--crema);border:1px solid var(--linea);color:var(--verde-osc);font-weight:700;width:auto}
+  .hide{display:none!important}
+  @media print{
+    body.print-ticket *{visibility:hidden!important}
+    body.print-ticket #ticketReceipt,body.print-ticket #ticketReceipt *{visibility:visible!important}
+    body.print-ticket #ticketReceipt{position:absolute;left:0;top:0;width:80mm;box-shadow:none;border-radius:0;border-color:#999}
+  }
+  @media(max-width:380px){
+    .hdr h1{font-size:14px}
+    .btn{padding:11px 14px;font-size:13px}
+    .form-grid{grid-template-columns:1fr}
+    .menu-edit{grid-template-columns:22px 1fr 56px 56px 62px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+  <header class="hdr">
+    <button class="logo" type="button" onclick="scrollToId('top')" aria-label="Ir al inicio"><img src="LA CARZINA ICONO.png" alt="La Carzina"></button>
+    <div class="grow">
+      <h1>La Carzina</h1>
+      <p>Asadero y Cocina</p>
+    </div>
+    <button class="cart-btn" type="button" onclick="openCart()">Pedido <span class="badge" id="cartBadge">0</span></button>
+  </header>
+
+  <section class="hero">
+    <img class="logo-big" src="LA CARZINA.png" alt="La Carzina Asadero y Cocina">
+    <h2>Menu del dia</h2>
+    <p>Platillos, guisos, caldos y paquetes listos para pedir por WhatsApp.</p>
+    <div class="ctas">
+      <button class="btn btn-primary" type="button" onclick="scrollToId('menuDia')">Ordenar ahora</button>
+      <button class="btn btn-ghost" type="button" onclick="openCart()">Ver pedido</button>
+    </div>
+  </section>
+
+  <div class="login-strip" id="loginStrip">
+    <div class="ic">LC</div>
+    <div class="txt">
+      <h3 id="loginStripTitle">Inicia sesión</h3>
+      <p id="loginStripText">Guarda tus datos y ordena rápido</p>
+    </div>
+    <div class="acts" id="loginStripActions">
+      <button class="btn btn-verde" type="button" onclick="openSubscribeModal(true)">Entrar</button>
+      <button class="btn btn-light" type="button" onclick="googleLoginDemo()">Continuar con Google</button>
+    </div>
+  </div>
+
+  <section id="menuDia">
+    <div class="sec-head">
+      <span class="chip green">Menú de hoy</span>
+      <h3 id="dayTitle">Menú del día de hoy</h3>
+      <p id="daySubtitle">Disponibilidad configurada por La Carzina para hoy.</p>
+    </div>
+    <div id="mainMenu"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="chip">Para compartir</span>
+      <h3>Guisos por kilo</h3>
+      <p>Selecciona tu guiso favorito y elige 1/2 kg o 1 kg.</p>
+    </div>
+    <div class="caldo share-card">
+      <div class="ph"><img src="Chile Relleno.png" alt="Guisos por kilo"></div>
+      <h4>Guisos por kilo</h4>
+      <p>Selecciona tu guiso favorito y elige 1/2 kg o 1 kg.</p>
+      <label for="shareGuiso">Selecciona un guiso</label>
+      <select id="shareGuiso" onchange="renderSharePrices()"></select>
+      <div id="sharePrices"></div>
+      <label for="shareNotas">Notas para cocina</label>
+      <textarea id="shareNotas" placeholder="Ej. sin cebolla, separar salsa, etc."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="chip green">Guarniciones</span>
+      <h3>Guarniciones</h3>
+      <p>Elige 1/2 litro o 1 litro de tus acompañamientos favoritos.</p>
+    </div>
+    <div class="caldo share-card">
+      <div class="ph"><img src="Guanisiones.png" alt="Guarniciones"></div>
+      <h4>Guarniciones</h4>
+      <p>Selecciona una guarnición disponible y su presentación.</p>
+      <label for="sideSelect">Selecciona una guarnición</label>
+      <select id="sideSelect" onchange="renderSidePrices()"></select>
+      <div id="sidePrices"></div>
+      <label for="sideNotas">Notas para cocina</label>
+      <textarea id="sideNotas" placeholder="Ej. separar, sin crema, etc."></textarea>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="chip">Caldos</span>
+      <h3 id="caldoTitle">Caldos disponibles</h3>
+      <p id="caldoSubtitle">Elige 1/2 litro o 1 litro.</p>
+    </div>
+    <div id="caldoBox"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="chip green">Paquetes</span>
+      <h3>Especiales</h3>
+      <p>Paquetes rapidos para llevar o compartir.</p>
+    </div>
+    <div class="pkg">
+      <div class="ph"><img src="Paquete diezmillo.png" alt="Paquete Diezmillo"><span class="tag">A solo $295</span></div>
+      <div class="body">
+        <h4>Paquete Diezmillo</h4>
+        <div class="price">$295</div>
+        <ul>
+          <li>1 kg de diezmillo</li>
+          <li>1 coca cola 2 L</li>
+          <li>Tortilla, cebolla, salsa y guacamole</li>
+        </ul>
+        <button class="btn btn-verde btn-block" type="button" onclick="addCatalogProduct('paquete-diezmillo','individual')">Agregar paquete</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="chip">Antojitos</span>
+      <h3>Extras del menu</h3>
+      <p>Agrega piezas o especiales al carrito.</p>
+    </div>
+    <div id="antojitosList"></div>
+  </section>
+
+  <section>
+    <div class="track">
+      <h4 id="trackFolio">Tu ultimo pedido aparecera aqui</h4>
+      <div class="steps" id="trackSteps">
+        <div class="s active"><div class="dot">1</div><p>Recibido</p></div><div class="bar"></div>
+        <div class="s"><div class="dot">2</div><p>Preparando</p></div><div class="bar"></div>
+        <div class="s"><div class="dot">3</div><p>En camino</p></div><div class="bar"></div>
+        <div class="s"><div class="dot">4</div><p>Entregado</p></div>
+      </div>
+    </div>
+    <div class="hist-panel">
+      <div class="hist-head">
+        <div class="txt">
+          <h4>Mis pedidos</h4>
+          <p id="histPointsSummary">Puntos del Club: 0 pts</p>
+        </div>
+        <button class="hist-toggle" id="histToggle" type="button" onclick="toggleHistoryList()">Ocultar</button>
+      </div>
+      <div class="hist-list" id="histListWrap">
+        <div id="histList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pointsSection"></section>
+
+  <section>
+    <div class="sec-head">
+      <span class="chip green">Encuentranos</span>
+      <h3>La Carzina</h3>
+      <p>Ciudad Obregon, Sonora</p>
+    </div>
+    <div class="find">
+      <div class="row"><div class="ic">WA</div><div><b>WhatsApp</b><br>644 142 7883</div></div>
+      <div class="row"><div class="ic">DIR</div><div><b>Direccion</b><br>Paris #2199 esquina con Jesus Garcia, Col. Bellavista</div></div>
+      <div class="row"><div class="ic">HR</div><div><b>Horario</b><br>Lunes a Domingo<br>7:00 AM - 6:00 PM</div></div>
+      <div class="row"><div class="ic">WEB</div><div><b>Dominio</b><br>lacarzina.com</div></div>
+      <div class="map-box">
+        <iframe title="Mapa La Carzina" loading="lazy" src="https://www.google.com/maps?q=Paris%202199%20Jesus%20Garcia%20Bellavista%20Ciudad%20Obregon%20Sonora&output=embed"></iframe>
+      </div>
+      <div class="social">
+        <a class="fb" href="https://www.facebook.com/la.carzina.cocina" target="_blank" rel="noopener" aria-label="Facebook"><span>f</span></a>
+        <a class="ig" href="https://www.instagram.com/la_carzina/" target="_blank" rel="noopener" aria-label="Instagram"><span>◎</span></a>
+        <a class="wa" href="https://wa.me/526441427883" target="_blank" rel="noopener" aria-label="WhatsApp"><span>☎</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <img src="LA CARZINA ICONO.png" alt="La Carzina" onclick="footLogoClick()">
+    <h4>La Carzina</h4>
+    <p>Asadero y Cocina</p>
+    <p>Paris #2199 esquina con Jesus Garcia, Bellavista</p>
+    <div class="admin-link" onclick="openAdminLogin()">Admin</div>
+    <div class="copy" onclick="copyClick()">© 2026 La Carzina. Todos los derechos reservados.</div>
+    <div class="powered">POWERED BY CLICKSON</div>
+  </footer>
+</div>
+
+<button class="fab" id="fabBtn" type="button" onclick="fabClick()">WhatsApp</button>
+<div class="toast" id="toast"></div>
+
+<div class="club-popup" id="clubPopup" onclick="if(event.target===this)closeClubPopup()">
+  <div class="club-popup-card">
+    <button class="close" type="button" onclick="closeClubPopup()" aria-label="Cerrar promoción">×</button>
+    <img src="club-la-carzina.png" alt="Club La Carzina">
+    <div class="content">
+      <button class="btn btn-primary btn-block" type="button" onclick="subscribeFromPopup()">Suscribirme gratis</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="subscribeModal" onclick="if(event.target===this)closeSubscribeModal()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>Club La Carzina</h3>
+      <button class="x" type="button" onclick="closeSubscribeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <label for="subName">Nombre</label><input id="subName" autocomplete="name" placeholder="Tu nombre">
+      <label for="subPhone" style="margin-top:10px">Teléfono</label><input id="subPhone" inputmode="tel" autocomplete="tel" placeholder="644...">
+      <label for="subBirthday" style="margin-top:10px">Fecha de cumpleaños opcional</label><input id="subBirthday" type="date">
+      <label class="ub-row" style="margin-top:12px;border:1px solid var(--linea);border-radius:12px;padding:10px">
+        <span class="nm">Quiero recibir promociones y acumular puntos</span>
+        <input id="subPromos" type="checkbox">
+      </label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-light" type="button" onclick="closeSubscribeModal()">Cancelar</button>
+      <button class="btn btn-verde" type="button" onclick="submitSubscription()">Suscribirme</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="joinPromptModal" onclick="if(event.target===this)closeJoinPrompt()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>¿Quieres acumular puntos?</h3>
+      <button class="x" type="button" onclick="closeJoinPrompt()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="points-card">
+        <h4>Únete al Club La Carzina</h4>
+        <p class="muted">Regístrate gratis y empieza a acumular puntos en tus próximos pedidos.</p>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-light" type="button" onclick="closeJoinPrompt()">Ahora no</button>
+      <button class="btn btn-verde" type="button" onclick="closeJoinPrompt();openSubscribeModal(true)">Unirme al Club</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="rewardsModal" onclick="if(event.target===this)closeRewardsModal()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>Premios disponibles</h3>
+      <button class="x" type="button" onclick="closeRewardsModal()">×</button>
+    </div>
+    <div class="modal-body" id="rewardsBody"></div>
+  </div>
+</div>
+
+<div class="cart-sheet" id="cartSheet" onclick="if(event.target===this)closeCart()">
+  <div class="cart-inner">
+    <div class="cart-head">
+      <h3>Tu pedido</h3>
+      <button type="button" onclick="closeCart()">×</button>
+    </div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-foot">
+      <div class="totals">
+        <div class="row"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+        <div class="row"><span>Envio</span><span id="cartShipping">Por confirmar</span></div>
+        <div class="row total"><span id="cartTotalLabel">Total sin envio</span><span id="cartTotal">$0</span></div>
+      </div>
+      <button class="btn btn-light btn-block" type="button" onclick="clearCart()">Vaciar carrito</button>
+      <button class="btn btn-verde btn-block" type="button" style="margin-top:8px" onclick="openCheckout()">Revisar pedido</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="builderModal" onclick="if(event.target===this)closeBuilder()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>Arma tu platillo</h3>
+      <button class="x" type="button" onclick="closeBuilder()">×</button>
+    </div>
+    <div class="modal-body" id="builderBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-light" type="button" onclick="builderPrev()">Atras</button>
+      <button class="btn btn-verde" type="button" id="builderNextBtn" onclick="builderNext()">Siguiente</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="checkoutModal" onclick="if(event.target===this)closeCheckout()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>Datos del pedido</h3>
+      <button class="x" type="button" onclick="closeCheckout()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="full"><label for="cName">Nombre</label><input id="cName" autocomplete="name" placeholder="Tu nombre"></div>
+        <div><label for="cPhone">Telefono</label><input id="cPhone" inputmode="tel" autocomplete="tel" placeholder="644..."></div>
+        <div><label for="cEmail">Email opcional</label><input id="cEmail" type="email" autocomplete="email" placeholder="correo@ejemplo.com"></div>
+        <div><label for="cTipo">Entrega</label><select id="cTipo" onchange="toggleDeliveryFields()"><option value="envio">Envio a domicilio</option><option value="recoger">Recoger en sucursal</option></select></div>
+        <div><label for="cPago">Pago</label><select id="cPago" onchange="togglePaymentFields()"><option value="efectivo">Efectivo</option><option value="transferencia">Transferencia</option></select></div>
+        <div class="payment-cash"><label for="cCambio">¿Con cuánto pagará?</label><input id="cCambio" inputmode="decimal" placeholder="Ej. 500"></div>
+        <div class="full payment-transfer hide"><label>Datos de transferencia</label><div class="empty" style="text-align:left;background:#fff;border-radius:12px">Banco: BBVA<br>Cuenta/CLABE: por confirmar<br>Titular: La Carzina</div></div>
+        <div class="full delivery-field"><label for="cDir">Direccion</label><input id="cDir" placeholder="Calle, numero" oninput="scheduleDeliveryQuote()"></div>
+        <div class="delivery-field"><label for="cCol">Colonia</label><input id="cCol" placeholder="Colonia" oninput="scheduleDeliveryQuote()"></div>
+        <div class="delivery-field"><label for="cRef">Referencia</label><input id="cRef" placeholder="Entre calles, color de casa..." oninput="scheduleDeliveryQuote()"></div>
+        <div class="full delivery-field"><div class="empty" id="deliveryQuoteBox" style="text-align:left;background:#fff;border-radius:12px">Envío: Por confirmar</div></div>
+        <div><label for="cCuando">Cuando lo quiere</label><select id="cCuando" onchange="toggleProgramField()"><option value="ya">Lo antes posible</option><option value="programado">Programar hora</option></select></div>
+        <div id="progField" class="hide"><label for="cProg">Hora</label><input id="cProg" type="time"></div>
+        <div class="full"><label for="cNotas">Notas generales</label><textarea id="cNotas" placeholder="Indicaciones generales para el pedido"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-light" type="button" onclick="closeCheckout()">Cerrar</button>
+      <button class="btn btn-verde" type="button" onclick="reviewOrder()">Revisar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="reviewModal" onclick="if(event.target===this)closeReview()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>Revisar pedido</h3>
+      <button class="x" type="button" onclick="closeReview()">×</button>
+    </div>
+    <div class="modal-body" id="reviewBody"></div>
+    <div class="modal-foot wrap-actions">
+      <button class="btn btn-light" type="button" onclick="closeReview()">Editar</button>
+      <button class="btn btn-light" type="button" onclick="downloadTicketPng()">Descargar PNG</button>
+      <button class="btn btn-light" type="button" onclick="printTicket()">Imprimir ticket</button>
+      <button class="btn btn-verde" type="button" onclick="sendWhatsAppOrder()">Enviar WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="adminLoginModal" onclick="if(event.target===this)closeAdminLogin()">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3>Acceso admin</h3>
+      <button class="x" type="button" onclick="closeAdminLogin()">×</button>
+    </div>
+    <div class="modal-body">
+      <label for="admU">Usuario</label><input id="admU" autocomplete="username">
+      <label for="admP" style="margin-top:10px">Contrasena</label><input id="admP" type="password" autocomplete="current-password">
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-light" type="button" onclick="closeAdminLogin()">Cerrar</button>
+      <button class="btn btn-verde" type="button" onclick="adminLogin()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="admin" id="adminPanel">
+  <div class="admin-hdr">
+    <h2>La Carzina Admin</h2>
+    <button type="button" onclick="closeAdmin()">Cerrar</button>
+  </div>
+  <div class="admin-tabs" id="admTabs">
+    <button type="button" data-tab="resumen" onclick="setAdmTab('resumen')">Resumen</button>
+    <button type="button" data-tab="pedidos" onclick="setAdmTab('pedidos')">Pedidos</button>
+    <button type="button" data-tab="menu" onclick="setAdmTab('menu')">Menú de hoy</button>
+    <button type="button" data-tab="catalogo" onclick="setAdmTab('catalogo')">Catálogo</button>
+    <button type="button" data-tab="clientes" onclick="setAdmTab('clientes')">Clientes</button>
+    <button type="button" data-tab="config" onclick="setAdmTab('config')">Config</button>
+  </div>
+  <div class="admin-body" id="admBody"></div>
+</div>
+
+<script src="firebase-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+const WA='526441427883';
+const BANK_INFO={banco:'BBVA',cuenta:'Por confirmar',titular:'La Carzina'};
+const DELIVERY_ENDPOINT=(window.LC_DELIVERY_ENDPOINT||'').trim();
+const ORDER_STATUSES=['Recibido','Preparando','En camino','Entregado'];
+const ADMIN_STATUSES=['Recibido','Preparando','En camino','Entregado','Cancelado'];
+const DIAS=['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'];
+const GUARNICIONES_BASE=['Frijol','Frijol Puercos','Arroz Rojo','Arroz Blanco','Spaguetti','Rajas','Colache'];
+const EXTRAS_PLATILLO=[
+  {grupo:'Refrescos Coca-Cola',items:['Coca-Cola 600 ml','Coca-Cola Sin Azúcar 600 ml','Sprite 600 ml','Fanta Naranja 600 ml','Sidral Mundet 600 ml']},
+  {grupo:'Aguas Garit',items:['Horchata','Jamaica','Cebada','Tamarindo','Piña','Té']},
+  {grupo:'Postres',items:['Flan','Carlota de Limón']}
+];
+const PRECIO_EXTRA=25;
+const CLUB_REWARDS=[
+  {puntos:50,nombre:'Agua fresca Garit gratis'},
+  {puntos:80,nombre:'Flan o Carlota gratis'},
+  {puntos:120,nombre:'Torta de Cochinita gratis'},
+  {puntos:200,nombre:'Platillo Individual gratis'}
+];
+const CATALOGO_PRODUCTOS_DEFAULT=[
+  {id:'guiso-bistec-ranchero',codigoVenta:'703',nombre:'Bistec Ranchero',categoria:'guisos',descripcion:'Guiso casero de res con salsa ranchera.',precioMedio:95,precioKilo:190,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:true},
+  {id:'guiso-pollo-en-crema',codigoVenta:'729',nombre:'Pollo en Crema',categoria:'guisos',descripcion:'Pollo en salsa cremosa estilo casero.',precioMedio:95,precioKilo:190,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:true},
+  {id:'guiso-cochinita',codigoVenta:'754',nombre:'Cochinita',categoria:'guisos',descripcion:'Cochinita sazonada para tacos o platillo.',precioMedio:60,precioKilo:120,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:true},
+  {id:'guiso-costilla-con-nopal',codigoVenta:'704',nombre:'Costilla con Nopal',categoria:'guisos',descripcion:'Costilla guisada con nopal.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-tinga-de-pollo',codigoVenta:'763',nombre:'Tinga de Pollo',categoria:'guisos',descripcion:'Pollo deshebrado con salsa de tinga.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-pollo-en-mole',codigoVenta:'705',nombre:'Pollo en Mole',categoria:'guisos',descripcion:'Pollo bañado en mole.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-pollo-teriyaki',codigoVenta:'773',nombre:'Pollo en Salsa Teriyaki',categoria:'guisos',descripcion:'Pollo con salsa teriyaki.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-carne-deshebrada-chile-colorado',codigoVenta:'747',nombre:'Carne Deshebrada en Chile Colorado',categoria:'guisos',descripcion:'Carne deshebrada en chile colorado.',precioMedio:85,precioKilo:170,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-estofado-de-pollo',codigoVenta:'749',nombre:'Estofado de Pollo',categoria:'guisos',descripcion:'Estofado casero de pollo.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-barbacoa',codigoVenta:'740',nombre:'Barbacoa',categoria:'guisos',descripcion:'Barbacoa lista para servir.',precioMedio:55,precioKilo:110,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-costilla-salsa-verde',codigoVenta:'739',nombre:'Costilla en Salsa Verde',categoria:'guisos',descripcion:'Costilla con salsa verde.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-costilla-salsa-roja',codigoVenta:'739',nombre:'Costilla en Salsa Roja',categoria:'guisos',descripcion:'Costilla con salsa roja.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-chicharron-salsa-verde',codigoVenta:'781',nombre:'Chicharron en Salsa Verde',categoria:'guisos',descripcion:'Chicharron en salsa verde.',precioMedio:100,precioKilo:200,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-chicharron-salsa-roja',codigoVenta:'781',nombre:'Chicharron en Salsa Roja',categoria:'guisos',descripcion:'Chicharron en salsa roja.',precioMedio:100,precioKilo:200,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-discada',codigoVenta:'779',nombre:'Discada',categoria:'guisos',descripcion:'Discada norteña para tacos o platillo.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:true},
+  {id:'guiso-albondigas-chipotle',codigoVenta:'701',nombre:'Albondigas en Chipotle',categoria:'guisos',descripcion:'Albondigas en salsa chipotle.',precioMedio:60,precioKilo:120,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-picadillo',codigoVenta:'741',nombre:'Picadillo',categoria:'guisos',descripcion:'Picadillo casero.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+  {id:'guiso-costilla-bbq',codigoVenta:'',nombre:'Costilla en Salsa BBQ',categoria:'guisos',descripcion:'Costilla en salsa BBQ.',precioMedio:80,precioKilo:160,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'Chile Relleno.png',destacado:false},
+
+  {id:'guarn-arroz-rojo',codigoVenta:'707',nombre:'Arroz Rojo',categoria:'guarniciones',descripcion:'Arroz rojo casero.',precioMedio:null,precioKilo:null,precioMedioLitro:20,precioLitro:40,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:true},
+  {id:'guarn-arroz-blanco',codigoVenta:'710',nombre:'Arroz Blanco',categoria:'guarniciones',descripcion:'Arroz blanco preparado.',precioMedio:null,precioKilo:null,precioMedioLitro:25,precioLitro:50,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:false},
+  {id:'guarn-frijol',codigoVenta:'711',nombre:'Frijol',categoria:'guarniciones',descripcion:'Frijol casero.',precioMedio:null,precioKilo:null,precioMedioLitro:20,precioLitro:40,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:false},
+  {id:'guarn-frijol-puercos',codigoVenta:'711',nombre:'Frijol Puercos',categoria:'guarniciones',descripcion:'Frijol puercos estilo Sonora.',precioMedio:null,precioKilo:null,precioMedioLitro:20,precioLitro:40,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:true},
+  {id:'guarn-spaghetti',codigoVenta:'704',nombre:'Spaghetti',categoria:'guarniciones',descripcion:'Spaghetti rojo.',precioMedio:null,precioKilo:null,precioMedioLitro:42.5,precioLitro:85,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:true},
+  {id:'guarn-colache',codigoVenta:'',nombre:'Colache',categoria:'guarniciones',descripcion:'Colache casero.',precioMedio:null,precioKilo:null,precioMedioLitro:42.5,precioLitro:85,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:false},
+  {id:'guarn-rajas',codigoVenta:'717',nombre:'Rajas',categoria:'guarniciones',descripcion:'Chile en rajas.',precioMedio:null,precioKilo:null,precioMedioLitro:65,precioLitro:130,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:false},
+  {id:'guarn-sopa-fria',codigoVenta:'742',nombre:'Sopa Fria',categoria:'guarniciones',descripcion:'Sopa fria preparada.',precioMedio:null,precioKilo:null,precioMedioLitro:35,precioLitro:70,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'Guanisiones.png',destacado:false},
+
+  {id:'caldo-albondigas',codigoVenta:'727',nombre:'Albondigas',categoria:'caldos',descripcion:'Caldo de albondigas.',precioMedio:null,precioKilo:null,precioMedioLitro:40,precioLitro:80,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+  {id:'caldo-lentejas',codigoVenta:'750',nombre:'Lentejas',categoria:'caldos',descripcion:'Lentejas caseras.',precioMedio:null,precioKilo:null,precioMedioLitro:30,precioLitro:60,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+  {id:'caldo-pollo',codigoVenta:'756',nombre:'Caldo de Pollo',categoria:'caldos',descripcion:'Caldo de pollo.',precioMedio:null,precioKilo:null,precioMedioLitro:32.5,precioLitro:65,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+  {id:'caldo-queso',codigoVenta:'752',nombre:'Caldo de Queso',categoria:'caldos',descripcion:'Caldo de queso.',precioMedio:null,precioKilo:null,precioMedioLitro:37.5,precioLitro:75,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:true},
+  {id:'caldo-cocido',codigoVenta:'720',nombre:'Cocido',categoria:'caldos',descripcion:'Cocido casero.',precioMedio:null,precioKilo:null,precioMedioLitro:40,precioLitro:80,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+  {id:'caldo-gallina-pinta',codigoVenta:'762',nombre:'Gallina Pinta',categoria:'caldos',descripcion:'Gallina pinta.',precioMedio:null,precioKilo:null,precioMedioLitro:37.5,precioLitro:75,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+  {id:'caldo-pozole',codigoVenta:'790',nombre:'Pozole',categoria:'caldos',descripcion:'Pozole preparado.',precioMedio:null,precioKilo:null,precioMedioLitro:52.5,precioLitro:105,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+  {id:'caldo-birria',codigoVenta:'755',nombre:'Birria',categoria:'caldos',descripcion:'Birria con consome.',precioMedio:null,precioKilo:null,precioMedioLitro:70,precioLitro:140,precioIndividual:null,unidad:'litro',activo:true,agotado:false,imagen:'caldos.png',destacado:false},
+
+  {id:'paquete-diezmillo',codigoVenta:'',nombre:'Paquete Diezmillo',categoria:'paquetes',descripcion:'1 kg de diezmillo, coca 2 L, tortillas, cebolla, salsa y guacamole.',precioMedio:null,precioKilo:null,precioMedioLitro:null,precioLitro:null,precioIndividual:295,unidad:'paquete',activo:true,agotado:false,imagen:'Paquete diezmillo.png',destacado:true},
+  {id:'extra-coca-600',codigoVenta:'',nombre:'Coca-Cola 600 ml',categoria:'bebidas',descripcion:'Refresco 600 ml.',precioMedio:null,precioKilo:null,precioMedioLitro:null,precioLitro:null,precioIndividual:25,unidad:'pieza',activo:true,agotado:false,imagen:'',destacado:false},
+  {id:'postre-flan',codigoVenta:'',nombre:'Flan',categoria:'postres',descripcion:'Postre individual.',precioMedio:null,precioKilo:null,precioMedioLitro:null,precioLitro:null,precioIndividual:25,unidad:'pieza',activo:true,agotado:false,imagen:'',destacado:false}
+];
+const MENU_HOY_DEFAULT={
+  guisosDisponibles:['guiso-cochinita','guiso-pollo-en-crema','guiso-discada'],
+  guarnicionesDisponibles:['guarn-arroz-rojo','guarn-frijol-puercos','guarn-spaghetti'],
+  caldosDisponibles:['caldo-queso'],
+  paquetesDisponibles:['paquete-diezmillo'],
+  extrasDisponibles:['extra-coca-600','postre-flan'],
+  actualizadoEn:'',
+  mensajeDelDia:'Menú sujeto a disponibilidad.',
+  publicado:true
+};
+const PRECIOS_GUISOS_DEFAULT={
+  'Bistec Ranchero':{medio:95,kilo:190},
+  'Cochinita':{medio:60,kilo:120},
+  'Pollo en Crema':{medio:95,kilo:190},
+  'Discada':{medio:80,kilo:160},
+  'Tinga de Pollo':{medio:80,kilo:160},
+  'Barbacoa':{medio:55,kilo:110},
+  'Carne Deshebrada':{medio:85,kilo:170},
+  'Picadillo':{medio:80,kilo:160},
+  'Pierna Mechada':{medio:95,kilo:190},
+  'Chicharron en Salsa Verde':{medio:100,kilo:200},
+  'Costilla con Nopal':{medio:80,kilo:160},
+  'Costilla en BBQ':{medio:80,kilo:160},
+  'Chuletas con Mostaza':{medio:120,kilo:240},
+  'Milanesa de Res':{medio:null,kilo:240},
+  'Pescado Capeado':{medio:null,kilo:240},
+  'Chile Relleno':{medio:null,kilo:145}
+};
+const CALDOS_DEFAULT={
+  'Caldo de Pollo':{medio:32.5,litro:65},
+  'Lentejas':{medio:30,litro:60},
+  'Gallina Pinta':{medio:37.5,litro:75},
+  'Albondigas':{medio:40,litro:80},
+  'Cocido':{medio:40,litro:80},
+  'Caldo de Queso':{medio:37.5,litro:75}
+};
+const MENU_POR_DIA_DEFAULT={
+  Lunes:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Discada','Tinga de Pollo','Barbacoa'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]},
+  Martes:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Carne Deshebrada','Chicharron en Salsa Verde'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]},
+  Miercoles:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Pierna Mechada','Discada','Costilla con Nopal','Pescado Capeado'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]},
+  Jueves:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Pierna Mechada','Picadillo','Pescado Capeado'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]},
+  Viernes:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Costilla en BBQ','Picadillo','Chuletas con Mostaza'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]},
+  Sabado:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Tinga de Pollo','Carne Deshebrada','Milanesa de Res'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]},
+  Domingo:{guisos:['Bistec Ranchero','Cochinita','Pollo en Crema','Barbacoa'],guarniciones:GUARNICIONES_BASE,caldo:'Caldo de Queso',agotados:[]}
+};
+const ANTOJITOS_DEFAULT=[
+  {n:'Tamales de Carne',p:25,u:'c/u'},
+  {n:'Torta de Cochinita',p:55,u:'c/u'},
+  {n:'Nachos con Carne',p:65,u:'c/u'},
+  {n:'Molletes con Carne',p:55,u:'c/u'},
+  {n:'Tenders de Pollo',p:130,u:'kg'},
+  {n:'Chile Relleno',p:145,u:'kg'},
+  {n:'Ensalada de Pollo a la Plancha',p:70,u:'ind.'}
+];
+let preciosGuisos=loadObject('lc_precios_guisos',PRECIOS_GUISOS_DEFAULT);
+let caldos=loadObject('lc_caldos',CALDOS_DEFAULT);
+let menuPorDia=mergeMenu(loadObject('lc_menu_por_dia',MENU_POR_DIA_DEFAULT));
+let catalogoProductos=mergeCatalog(loadObject('lc_catalogo_productos',CATALOGO_PRODUCTOS_DEFAULT));
+let menuHoy=mergeMenuHoy(loadObject('lc_menu_hoy',MENU_HOY_DEFAULT));
+let antojitos=loadObject('lc_antojitos',ANTOJITOS_DEFAULT);
+let cart=loadObject('lc_cart',[]);
+let orders=loadObject('lc_orders',[]);
+let clientes=loadObject('lc_clientes',[]);
+let clienteSuscrito=loadObject('lc_cliente_suscrito',null);
+let clientePerfil=loadObject('lc_cliente_perfil',null);
+let premiosCanjeados=loadObject('lc_premios_canjeados',[]);
+let orderHistory=loadObject('lc_hist',[]);
+let config=loadObject('lc_config',{nombre:'La Carzina',wa:'6441427883',dir:'Paris #2199 esquina con Jesus Garcia, Col. Bellavista',fb:'https://www.facebook.com/la.carzina.cocina',ig:'https://www.instagram.com/la_carzina/'});
+let currentDay=localStorage.getItem('lc_current_day')||getTodayName();
+let builder={step:1,guiso:'',guarniciones:[],extras:[],notas:''};
+let selectedShareSize='medio';
+let selectedSideSize='medio';
+let pendingFolio=null;
+let newCatalogProductId=null;
+let historyListOpen=true;
+let adminMenuSaveStatus='';
+let copyClicks=0,footLogoClicks=0,copyTimer,footTimer;
+let deliveryQuote={status:'confirm',price:null,distanceKm:null,base:0,extra:0,zone:'',text:'Por confirmar segun ubicacion',reason:'init'};
+let deliveryQuoteTimer=null;
+let deliveryQuoteToken=0;
+
+function loadObject(key,fallback){
+  try{
+    const saved=localStorage.getItem(key);
+    return saved?JSON.parse(saved):JSON.parse(JSON.stringify(fallback));
+  }catch(e){return JSON.parse(JSON.stringify(fallback));}
+}
+function saveObject(key,value){localStorage.setItem(key,JSON.stringify(value));}
+function mergeCatalog(saved){
+  const byId={};
+  CATALOGO_PRODUCTOS_DEFAULT.forEach(p=>byId[p.id]=Object.assign({},p));
+  (Array.isArray(saved)?saved:[]).forEach(p=>{if(p&&p.id)byId[p.id]=Object.assign({},byId[p.id]||{},p)});
+  return Object.values(byId);
+}
+function mergeMenuHoy(saved){
+  return Object.assign({},MENU_HOY_DEFAULT,saved||{},{
+    guisosDisponibles:Array.isArray(saved?.guisosDisponibles)?saved.guisosDisponibles:MENU_HOY_DEFAULT.guisosDisponibles,
+    guarnicionesDisponibles:Array.isArray(saved?.guarnicionesDisponibles)?saved.guarnicionesDisponibles:MENU_HOY_DEFAULT.guarnicionesDisponibles,
+    caldosDisponibles:Array.isArray(saved?.caldosDisponibles)?saved.caldosDisponibles:MENU_HOY_DEFAULT.caldosDisponibles,
+    paquetesDisponibles:Array.isArray(saved?.paquetesDisponibles)?saved.paquetesDisponibles:MENU_HOY_DEFAULT.paquetesDisponibles,
+    extrasDisponibles:Array.isArray(saved?.extrasDisponibles)?saved.extrasDisponibles:MENU_HOY_DEFAULT.extrasDisponibles
+  });
+}
+function mergeMenu(saved){
+  const merged=JSON.parse(JSON.stringify(MENU_POR_DIA_DEFAULT));
+  DIAS.forEach(d=>{merged[d]=Object.assign(merged[d],saved[d]||{});});
+  return merged;
+}
+function applyCaldoQuesoDefaultOnce(){
+  if(localStorage.getItem('lc_caldo_queso_default_applied'))return;
+  DIAS.forEach(d=>{menuPorDia[d].caldo='Caldo de Queso';});
+  saveObject('lc_menu_por_dia',menuPorDia);
+  localStorage.setItem('lc_caldo_queso_default_applied','1');
+}
+function money(n){return '$'+Number(n||0).toLocaleString('es-MX',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2});}
+function escapeHtml(str){return String(str??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function getTodayName(){
+  const jsDay=new Date().getDay();
+  return ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'][jsDay];
+}
+function dayData(){return menuPorDia[currentDay];}
+function isSoldOut(g){return (dayData().agotados||[]).includes(g);}
+function activeGuisos(){return dayData().guisos.filter(g=>preciosGuisos[g]);}
+function availableGuisos(){return activeGuisos().filter(g=>!isSoldOut(g));}
+function saveCatalog(){saveObject('lc_catalogo_productos',catalogoProductos);}
+function saveMenuHoy(){saveObject('lc_menu_hoy',menuHoy);}
+function applyRemoteMenuState(data){
+  if(!data)return false;
+  if(data.menuHoy)menuHoy=mergeMenuHoy(data.menuHoy);
+  if(Array.isArray(data.catalogoProductos))catalogoProductos=mergeCatalog(data.catalogoProductos);
+  saveMenuHoy();
+  saveCatalog();
+  renderTodayMenu();
+  renderShareSelector();
+  renderSides();
+  renderCaldo();
+  renderAntojitos();
+  return true;
+}
+async function loadRemoteMenuState(){
+  if(!window.lcFirebase||!window.lcFirebase.loadMenuConfig)return false;
+  try{
+    const data=await window.lcFirebase.loadMenuConfig();
+    if(data&&applyRemoteMenuState(data)){
+      console.info('Menu remoto cargado');
+      window.__LC_REMOTE_MENU_LOADED=true;
+      return true;
+    }
+  }catch(e){
+    console.warn('No se pudo cargar menu remoto; usando respaldo local',e);
+  }
+  return false;
+}
+window.loadRemoteMenuState=loadRemoteMenuState;
+function productById(id){return catalogoProductos.find(p=>p.id===id);}
+function productByName(name){return catalogoProductos.find(p=>p.nombre===name);}
+function idsForCategory(cat){return catalogoProductos.filter(p=>p.categoria===cat&&p.activo).map(p=>p.id);}
+function menuIdsForCategory(cat){
+  const key={guisos:'guisosDisponibles',guarniciones:'guarnicionesDisponibles',caldos:'caldosDisponibles',paquetes:'paquetesDisponibles',extras:'extrasDisponibles',bebidas:'extrasDisponibles',postres:'extrasDisponibles'}[cat];
+  return key?menuHoy[key]||[]:[];
+}
+function todayProducts(cat,includeSold=false){
+  if(!menuHoy.publicado)return [];
+  const ids=menuIdsForCategory(cat);
+  return ids.map(productById).filter(Boolean).filter(p=>p.activo&&(includeSold||!p.agotado)).sort((a,b)=>(b.destacado?1:0)-(a.destacado?1:0)||a.nombre.localeCompare(b.nombre));
+}
+function isTodayProductSold(id){const p=productById(id);return !p||p.agotado;}
+function hasPublishedMenu(){
+  return !!menuHoy.publicado&&['guisos','guarniciones','caldos','paquetes'].some(cat=>todayProducts(cat,true).length);
+}
+function formatUpdated(){
+  if(!menuHoy.actualizadoEn)return 'Actualizado hoy';
+  const d=new Date(menuHoy.actualizadoEn);
+  if(Number.isNaN(d.getTime()))return 'Actualizado hoy';
+  return 'Actualizado hoy a las '+d.toLocaleTimeString('es-MX',{hour:'numeric',minute:'2-digit'});
+}
+function searchValue(){return (document.getElementById('menuSearch')?.value||'').trim().toLowerCase();}
+function matchesSearch(p){
+  const q=searchValue();
+  if(!q)return true;
+  return [p.nombre,p.descripcion,p.categoria,p.codigoVenta].join(' ').toLowerCase().includes(q);
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+// Produccion Firebase/Firestore:
+// clientes: documento por telefono normalizado con puntos, pedidos, totalGastado y premiosCanjeados.
+// pedidos: guardar folio, telefono, productos, total y puntosGanados.
+// premios: catalogo de premios canjeables.
+// config: contadores globales como folio_counter. El telefono funciona como identificador del cliente.
+function normalizePhone(phone){return String(phone||'').replace(/\D/g,'');}
+function saveClubClient(client){
+  clienteSuscrito=client;
+  saveObject('lc_cliente_suscrito',clienteSuscrito);
+  saveCustomerProfile({nombre:client.nombre,telefono:client.telefono,email:client.email||''});
+  closeClubPopup(false);
+  renderPointsSection();
+  renderLoginStrip();
+}
+function clubClient(){return clienteSuscrito&&clienteSuscrito.promos?clienteSuscrito:null;}
+function renderLoginStrip(){
+  const client=clubClient();
+  const title=document.getElementById('loginStripTitle');
+  const text=document.getElementById('loginStripText');
+  const actions=document.getElementById('loginStripActions');
+  if(!title||!text||!actions)return;
+  if(client){
+    title.textContent='Hola, '+(client.nombre||'cliente');
+    text.textContent='Tus datos están guardados para ordenar rápido';
+    actions.innerHTML='<button class="btn btn-verde" type="button" onclick="openSubscribeModal(true)">Mi cuenta</button>';
+  }else{
+    title.textContent='Inicia sesión';
+    text.textContent='Guarda tus datos y ordena rápido';
+    actions.innerHTML='<button class="btn btn-verde" type="button" onclick="openSubscribeModal(true)">Entrar</button><button class="btn btn-light" type="button" onclick="googleLoginDemo()">Continuar con Google</button>';
+  }
+}
+window.saveClubClient=saveClubClient;
+window.clubClient=clubClient;
+function pointsForTotal(total){return Math.floor(Number(total||0)/10);}
+function previewClubInfo(total){
+  const client=clubClient();
+  if(!client)return null;
+  const ganados=pointsForTotal(total);
+  return {ganados,acumulados:Number(client.puntos||0)+ganados,nombre:client.nombre};
+}
+function localPointsFromHistory(){
+  return orders.reduce((sum,o)=>sum+pointsForTotal(o.subtotal||o.total||0),0);
+}
+function scheduleClubPopup(){
+  if(localStorage.getItem('lc_sub_popup_closed')==='true'||clubClient())return;
+  clearTimeout(scheduleClubPopup._timer);
+  scheduleClubPopup._timer=setTimeout(()=>showClubPopup(),1500);
+}
+function showClubPopup(){
+  if(localStorage.getItem('lc_sub_popup_closed')==='true'||clubClient())return;
+  const popup=document.getElementById('clubPopup');
+  if(popup)popup.classList.add('open');
+}
+function closeClubPopup(remember=true){
+  const popup=document.getElementById('clubPopup');
+  if(popup)popup.classList.remove('open');
+  if(remember)localStorage.setItem('lc_sub_popup_closed','true');
+}
+function subscribeFromPopup(){
+  closeClubPopup(false);
+  openSubscribeModal(true);
+}
+async function googleLoginDemo(){
+  if(!window.lcFirebase||!window.lcFirebase.enabled)return toast('Pega firebase-config.js para activar Google Login.');
+  if(!window.lcFirebase.signInWithGoogle)return toast('Activa Authentication > Google en Firebase.');
+  window.lcFirebase.signInWithGoogle().then(()=>renderLoginStrip()).catch(err=>{
+    console.error('Google login failed',err);
+    const code=String(err&&err.code||'');
+    if(code.includes('popup'))toast('No se pudo abrir Google. Permite popups e intenta de nuevo.');
+    else toast('No se pudo iniciar sesión con Google.');
+  });
+}
+function openSubscribeModal(prefill=false){
+  const client=clubClient();
+  document.getElementById('subName').value=(client&&client.nombre)||document.getElementById('cName')?.value||'';
+  document.getElementById('subPhone').value=(client&&client.telefono)||document.getElementById('cPhone')?.value||'';
+  document.getElementById('subBirthday').value=(client&&client.cumple)||'';
+  document.getElementById('subPromos').checked=!!client||prefill;
+  document.getElementById('subscribeModal').classList.add('open');
+}
+function closeSubscribeModal(){document.getElementById('subscribeModal').classList.remove('open');}
+function submitSubscription(){
+  const nombre=document.getElementById('subName').value.trim();
+  const telefono=document.getElementById('subPhone').value.trim();
+  const promos=document.getElementById('subPromos').checked;
+  if(!nombre)return toast('El nombre es obligatorio.');
+  if(!telefono)return toast('El teléfono es obligatorio.');
+  if(!promos)return toast('Activa la casilla para acumular puntos.');
+  const previous=clubClient();
+  const client={
+    nombre,
+    telefono,
+    telefonoId:normalizePhone(telefono),
+    cumple:document.getElementById('subBirthday').value,
+    promos:true,
+    puntos:previous?Number(previous.puntos||0):0,
+    pedidos:previous?Number(previous.pedidos||0):0,
+    totalGastado:previous?Number(previous.totalGastado||0):0,
+    premiosCanjeados:previous&&Array.isArray(previous.premiosCanjeados)?previous.premiosCanjeados:[]
+  };
+  saveClubClient(client);
+  localStorage.setItem('lc_sub_popup_closed','true');
+  closeSubscribeModal();
+  toast('Ya formas parte del Club La Carzina');
+}
+function closeJoinPrompt(){document.getElementById('joinPromptModal').classList.remove('open');}
+function maybePromptJoin(){
+  if(clubClient())return;
+  setTimeout(()=>document.getElementById('joinPromptModal').classList.add('open'),450);
+}
+function nextRewardInfo(points){
+  const reward=CLUB_REWARDS.find(r=>points<r.puntos)||CLUB_REWARDS[CLUB_REWARDS.length-1];
+  const needed=Math.max(0,reward.puntos-points);
+  const progress=reward.puntos?Math.min(100,(points/reward.puntos)*100):100;
+  return {reward,needed,progress};
+}
+function renderPointsSection(){
+  const box=document.getElementById('pointsSection');
+  if(!box)return;
+  const client=clubClient();
+  if(!client){
+    box.innerHTML=`
+      <div class="sec-head"><span class="chip">Club La Carzina</span><h3>Mis puntos</h3><p>Suscríbete gratis y acumula puntos en cada pedido.</p></div>
+      <div class="points-card">
+        <h4>Empieza a ganar premios</h4>
+        <p class="muted">Acumula puntos en cada pedido y canjéalos por comida gratis.</p>
+        <button class="btn btn-verde btn-block" type="button" onclick="openSubscribeModal()">Unirme al Club</button>
+      </div>`;
+    return;
+  }
+  const points=Math.max(Number(client.puntos||0),localPointsFromHistory());
+  const info=nextRewardInfo(points);
+  box.innerHTML=`
+    <div class="sec-head"><span class="chip">Club La Carzina</span><h3>Mis puntos</h3><p>Premios exclusivos para clientes registrados.</p></div>
+    <div class="points-card">
+      <h4>Hola, ${escapeHtml(client.nombre)}</h4>
+      <div class="big">${points} pts</div>
+      <p class="muted">${points} / ${info.reward.puntos} puntos para ${escapeHtml(info.reward.nombre)}</p>
+      <div class="bar"><span style="width:${info.progress}%"></span></div>
+      <div class="acts">
+        <button class="btn btn-verde" type="button" onclick="openRewardsModal()">Ver premios</button>
+        <button class="btn btn-light" type="button" onclick="openSubscribeModal(true)">Actualizar datos</button>
+      </div>
+    </div>`;
+}
+function openRewardsModal(){
+  const client=clubClient();
+  if(!client)return openSubscribeModal();
+  const points=Number(client.puntos||0);
+  document.getElementById('rewardsBody').innerHTML=CLUB_REWARDS.map((r,i)=>{
+    const ok=points>=r.puntos;
+    return `<div class="reward-row">
+      <div class="top"><b>${escapeHtml(r.nombre)}</b><span class="chip">${r.puntos} pts</span></div>
+      <small>${ok?'Disponible':'Te faltan '+(r.puntos-points)+' puntos'}</small>
+      ${ok?`<button class="btn btn-verde" type="button" onclick="redeemReward(${i})">Canjear</button>`:''}
+    </div>`;
+  }).join('');
+  document.getElementById('rewardsModal').classList.add('open');
+}
+function closeRewardsModal(){document.getElementById('rewardsModal').classList.remove('open');}
+function redeemReward(index){
+  const client=clubClient();
+  const reward=CLUB_REWARDS[index];
+  if(!client||!reward)return;
+  if(Number(client.puntos||0)<reward.puntos)return toast('Aún no tienes puntos suficientes.');
+  client.puntos=Number(client.puntos||0)-reward.puntos;
+  const record={nombre:reward.nombre,puntos:reward.puntos,fecha:new Date().toISOString()};
+  client.premiosCanjeados=Array.isArray(client.premiosCanjeados)?client.premiosCanjeados:[];
+  client.premiosCanjeados.unshift(record);
+  premiosCanjeados.unshift(record);
+  saveObject('lc_premios_canjeados',premiosCanjeados);
+  saveClubClient(client);
+  addToCart({nombre:'Premio: '+reward.nombre,precio:0,qty:1,tipo:'Premio Club',notas:'Canjeado con '+reward.puntos+' puntos'});
+  openRewardsModal();
+  toast('Premio agregado a tu pedido');
+}
+
+function init(){
+  applyCaldoQuesoDefaultOnce();
+  applyConfig();
+  scheduleClubPopup();
+  renderTodayMenu();
+  renderShareSelector();
+  renderSides();
+  renderCaldo();
+  renderAntojitos();
+  updateBadge();
+  renderHistorial();
+  updateTrackingFromLastOrder();
+  renderPointsSection();
+  renderLoginStrip();
+  applySavedClientData();
+  toggleDeliveryFields();
+  togglePaymentFields();
+  toggleProgramField();
+}
+function applyConfig(){
+  WA_NUMBER=(config.wa||'6441427883').replace(/\D/g,'');
+}
+
+function renderDayTabs(){
+  renderTodayMenu();
+}
+function selectDay(day,announce=true){
+  renderTodayMenu();
+  renderShareSelector();
+  renderSides();
+  renderCaldo();
+}
+function renderTodayMenu(){renderMainMenu();}
+function renderMainMenu(){
+  const box=document.getElementById('mainMenu');
+  const q=searchValue();
+  const guisos=todayProducts('guisos',true).filter(matchesSearch);
+  document.getElementById('dayTitle').textContent='Menú del día de hoy';
+  document.getElementById('daySubtitle').textContent=hasPublishedMenu()?`${todayProducts('guisos',true).length} guisos, ${todayProducts('guarniciones',true).length} guarniciones y ${todayProducts('caldos',true).length} caldos disponibles.`:'Disponibilidad pendiente de publicar.';
+  if(!hasPublishedMenu()){
+    box.innerHTML=`<div class="no-menu"><h4>Estamos preparando el menú de hoy</h4><p>Vuelve más tarde o escríbenos por WhatsApp para conocer disponibilidad.</p><button class="btn btn-verde" type="button" onclick="window.open('https://wa.me/${WA}?text='+encodeURIComponent('Hola, quiero preguntar por la disponibilidad del menú de hoy.'),'_blank')">Preguntar por WhatsApp</button></div>`;
+    return;
+  }
+  box.innerHTML=`
+    <div class="today-card">
+      <div class="cover"><img src="MENU DE HOY.png" alt="Menú de hoy La Carzina"></div>
+      <div class="headrow">
+        <div><h4>Guisos disponibles hoy</h4><div class="updated">${formatUpdated()}</div></div>
+        <span class="status-badge star">Actualizado hoy</span>
+      </div>
+      ${menuHoy.mensajeDelDia?`<div class="today-msg">${escapeHtml(menuHoy.mensajeDelDia)}</div>`:''}
+      <p class="muted">Selecciona tu guiso favorito y arma tu pedido.</p>
+      <input class="menu-search" id="menuSearch" value="${escapeHtml(q)}" placeholder="Buscar guiso, caldo o guarnición" oninput="renderTodayMenu();renderShareSelector();renderSides();renderCaldo()">
+      <div class="product-list">
+        ${guisos.map(productCard).join('')||'<div class="empty">No hay guisos que coincidan con tu búsqueda.</div>'}
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="ph"><img src="PAquete individual.png" alt="Platillo individual"><span class="tag">1 guiso + 2 guarniciones</span></div>
+      <div class="body">
+        <h4>Platillo Individual</h4>
+        <div class="price">$75</div>
+        <ul>
+          <li>Selecciona 1 guiso disponible hoy</li>
+          <li>Incluye exactamente 2 guarniciones</li>
+          <li>Agrega notas opcionales para cocina</li>
+        </ul>
+        <button class="btn btn-verde btn-block" type="button" onclick="openBuilder()">Armar platillo</button>
+      </div>
+    </div>`;
+}
+function productCard(p){
+  const sold=p.agotado;
+  const prices=[];
+  if(p.precioMedio)prices.push(`1/2 kg <b>${money(p.precioMedio)}</b>`);
+  if(p.precioKilo)prices.push(`1 kg <b>${money(p.precioKilo)}</b>`);
+  return `<div class="product-mini">
+    <div class="top"><div><h5>${escapeHtml(p.nombre)}</h5><div class="code">${p.codigoVenta?'Código '+escapeHtml(p.codigoVenta):'Sin código'}</div></div><span class="status-badge ${sold?'sold':p.destacado?'star':''}">${sold?'Agotado':p.destacado?'Recomendado':'Disponible'}</span></div>
+    <p>${escapeHtml(p.descripcion||'Disponible hoy.')}</p>
+    <div class="prices">${prices.join(' · ')}</div>
+    <div class="acts">
+      ${p.precioMedio?`<button class="btn btn-light" type="button" ${sold?'disabled':''} onclick="addCatalogProduct('${p.id}','medio')">1/2 kg</button>`:''}
+      ${p.precioKilo?`<button class="btn btn-verde" type="button" ${sold?'disabled':''} onclick="addCatalogProduct('${p.id}','kilo')">1 kg</button>`:''}
+    </div>
+  </div>`;
+}
+function addCatalogProduct(id,size,notes=''){
+  const p=productById(id);
+  if(!p||!p.activo||p.agotado)return toast('Producto agotado o no disponible.');
+  let label='',price=0,tipo=p.categoria;
+  if(size==='medio'){label='1/2 kg';price=p.precioMedio;}
+  if(size==='kilo'){label='1 kg';price=p.precioKilo;}
+  if(size==='medioLitro'){label='1/2 litro';price=p.precioMedioLitro;}
+  if(size==='litro'){label='1 litro';price=p.precioLitro;}
+  if(size==='individual'){label='';price=p.precioIndividual;}
+  if(price===null||price===undefined)return toast('Presentación no disponible.');
+  const nombre=label?`${label} de ${p.nombre}`:p.nombre;
+  addToCart({nombre,precio:price,qty:1,tipo,categoria:p.categoria,presentacion:label,codigoVenta:p.codigoVenta||'',productoId:p.id,notas:notes});
+}
+
+function renderShareSelector(){
+  const sel=document.getElementById('shareGuiso');
+  const guisos=todayProducts('guisos',true).filter(matchesSearch);
+  sel.innerHTML='<option value="">Selecciona un guiso</option>'+guisos.map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml(p.nombre)}${p.agotado?' - Agotado':''}</option>`).join('');
+  sel.value=(todayProducts('guisos')[0]||{}).id||'';
+  renderSharePrices();
+}
+function renderSharePrices(){
+  const id=document.getElementById('shareGuiso').value;
+  const box=document.getElementById('sharePrices');
+  if(!id){box.innerHTML='<p class="muted" style="margin:10px 0">Elige un guiso para ver precios.</p>';return;}
+  const p=productById(id);
+  if(!p){box.innerHTML='<p class="muted" style="margin:10px 0">Producto no encontrado.</p>';return;}
+  if(!p.precioMedio&&selectedShareSize==='medio')selectedShareSize='kilo';
+  let html=p.agotado?'<p class="warning">Este guiso está agotado hoy.</p>':'';
+  html+='<div class="price-row">';
+  if(p.precioMedio)html+=`<button type="button" class="${selectedShareSize==='medio'?'active':''}" onclick="selectShareSize('medio')">1/2 kg<br>${money(p.precioMedio)}</button>`;
+  if(p.precioKilo)html+=`<button type="button" class="${selectedShareSize==='kilo'?'active':''}" onclick="selectShareSize('kilo')">1 kg<br>${money(p.precioKilo)}</button>`;
+  html+='</div><button class="btn btn-verde btn-block" type="button" onclick="addSelectedShare()">Agregar guiso</button>';
+  box.innerHTML=html;
+}
+function selectShareSize(size){
+  selectedShareSize=size;
+  renderSharePrices();
+}
+function addSelectedShare(){addShare(selectedShareSize);}
+function addShare(size){
+  const id=document.getElementById('shareGuiso').value;
+  if(!id)return toast('Selecciona un guiso.');
+  addCatalogProduct(id,size,document.getElementById('shareNotas').value.trim());
+  document.getElementById('shareNotas').value='';
+}
+
+function renderSides(){
+  const sel=document.getElementById('sideSelect');
+  if(!sel)return;
+  const sides=todayProducts('guarniciones',true).filter(matchesSearch);
+  sel.innerHTML='<option value="">Selecciona una guarnición</option>'+sides.map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml(p.nombre)}${p.agotado?' - Agotado':''}</option>`).join('');
+  sel.value=(todayProducts('guarniciones')[0]||{}).id||'';
+  renderSidePrices();
+}
+function renderSidePrices(){
+  const id=document.getElementById('sideSelect')?.value;
+  const box=document.getElementById('sidePrices');
+  if(!box)return;
+  if(!id){box.innerHTML='<p class="muted" style="margin:10px 0">Elige una guarnición para ver precios.</p>';return;}
+  const p=productById(id);
+  if(!p){box.innerHTML='<p class="muted">Producto no encontrado.</p>';return;}
+  if(!p.precioMedioLitro&&selectedSideSize==='medio')selectedSideSize='litro';
+  let html=p.agotado?'<p class="warning">Esta guarnición está agotada hoy.</p>':'';
+  html+='<div class="price-row">';
+  if(p.precioMedioLitro)html+=`<button type="button" class="${selectedSideSize==='medio'?'active':''}" onclick="selectSideSize('medio')">1/2 L<br>${money(p.precioMedioLitro)}</button>`;
+  if(p.precioLitro)html+=`<button type="button" class="${selectedSideSize==='litro'?'active':''}" onclick="selectSideSize('litro')">1 L<br>${money(p.precioLitro)}</button>`;
+  html+='</div><button class="btn btn-verde btn-block" type="button" onclick="addSelectedSide()">Agregar guarnición</button>';
+  box.innerHTML=html;
+}
+function selectSideSize(size){selectedSideSize=size;renderSidePrices();}
+function addSelectedSide(){
+  const id=document.getElementById('sideSelect').value;
+  if(!id)return toast('Selecciona una guarnición.');
+  addCatalogProduct(id,selectedSideSize==='medio'?'medioLitro':'litro',document.getElementById('sideNotas').value.trim());
+  document.getElementById('sideNotas').value='';
+}
+
+function renderCaldo(){
+  const caldosHoy=todayProducts('caldos',true).filter(matchesSearch);
+  document.getElementById('caldoTitle').textContent='Caldos disponibles';
+  document.getElementById('caldoSubtitle').textContent='Elige 1/2 litro o 1 litro.';
+  document.getElementById('caldoBox').innerHTML=`
+    <div class="caldo">
+      <div class="ph"><img src="caldos.png" alt="Caldos"></div>
+      <h4>Caldos disponibles</h4>
+      <p>Disponibles según el menú publicado hoy.</p>
+      <div class="product-list">${caldosHoy.map(caldoCard).join('')||'<div class="empty">No hay caldos disponibles.</div>'}</div>
+    </div>`;
+}
+function caldoCard(p){
+  return `<div class="product-mini">
+    <div class="top"><div><h5>${escapeHtml(p.nombre)}</h5><div class="code">${p.codigoVenta?'Código '+escapeHtml(p.codigoVenta):'Sin código'}</div></div><span class="status-badge ${p.agotado?'sold':p.destacado?'star':''}">${p.agotado?'Agotado':p.destacado?'Recomendado':'Disponible'}</span></div>
+    <p>${escapeHtml(p.descripcion||'Caldo disponible hoy.')}</p>
+    <div class="prices">1/2 L <b>${money(p.precioMedioLitro)}</b> · 1 L <b>${money(p.precioLitro)}</b></div>
+    <div class="acts"><button class="btn btn-light" type="button" ${p.agotado?'disabled':''} onclick="addCatalogProduct('${p.id}','medioLitro')">1/2 litro</button><button class="btn btn-verde" type="button" ${p.agotado?'disabled':''} onclick="addCatalogProduct('${p.id}','litro')">1 litro</button></div>
+  </div>`;
+}
+function addCaldo(size){
+  const p=todayProducts('caldos')[0];
+  if(!p)return toast('No hay caldos disponibles.');
+  addCatalogProduct(p.id,size==='medio'?'medioLitro':'litro');
+}
+
+function renderAntojitos(){
+  const box=document.getElementById('antojitosList');
+  box.innerHTML=antojitos.map((a,i)=>`
+    <div class="antojo">
+      <div class="ico">${i+1}</div>
+      <div class="info"><h5>${escapeHtml(a.n)}</h5><div class="pp">${money(a.p)} ${escapeHtml(a.u)}</div></div>
+      <button class="btn btn-verde" type="button" onclick="addAntojo(${i})">Agregar</button>
+    </div>`).join('');
+}
+function addAntojo(i){
+  const a=antojitos[i];
+  addToCart({nombre:a.n,precio:a.p,qty:1,tipo:'Antojito',notas:a.u});
+}
+function addPackage(nombre,precio,notas){
+  addToCart({nombre,precio,qty:1,tipo:'Paquete',categoria:'paquetes',notas});
+}
+
+function openBuilder(){
+  builder={step:1,guiso:'',guarniciones:[],extras:[],notas:''};
+  if(!todayProducts('guisos').length)return toast('Por el momento no hay guisos activos para armar platillo.');
+  if(!todayProducts('guarniciones').length)return toast('Por el momento no hay guarniciones activas.');
+  renderBuilder();
+  document.getElementById('builderModal').classList.add('open');
+}
+function closeBuilder(){document.getElementById('builderModal').classList.remove('open');}
+function builderPrev(){if(builder.step>1){builder.step--;renderBuilder();}else closeBuilder();}
+function builderNext(){
+  if(builder.step===1&&!builder.guiso)return toast('Selecciona 1 guiso.');
+  if(builder.step===2&&builder.guarniciones.length!==2)return toast('Selecciona exactamente 2 guarniciones.');
+  if(builder.step===4){builder.notas=document.getElementById('builderNotas').value.trim();builder.step=5;renderBuilder();return;}
+  if(builder.step===5){addIndividual();return;}
+  builder.step++;renderBuilder();
+}
+function builderTotal(){return 75+(builder.extras.length*PRECIO_EXTRA);}
+function renderBuilder(){
+  const body=document.getElementById('builderBody');
+  const next=document.getElementById('builderNextBtn');
+  if(builder.step===1){
+    next.textContent='Siguiente';
+    const guisos=todayProducts('guisos');
+    body.innerHTML=`
+      <div class="ub-sec">
+        <div class="head"><div class="ttl"><b>Paso 1: selecciona tu guiso</b><small>Requerido - elige 1</small></div><span class="tag ${builder.guiso?'ok':'req'}">${builder.guiso?'Listo':'Req.'}</span></div>
+        <div class="ub-body">
+          ${guisos.map(p=>`<label class="ub-row"><span class="nm">${escapeHtml(p.nombre)} ${p.codigoVenta?'<small class="muted">#'+escapeHtml(p.codigoVenta)+'</small>':''}</span><input type="radio" name="builderGuiso" ${builder.guiso===p.nombre?'checked':''} onchange="builder.guiso='${escapeHtml(p.nombre)}';builder.guisoId='${p.id}';renderBuilder()"></label>`).join('')||'<div class="empty">Por el momento no hay guisos activos para armar platillo.</div>'}
+        </div>
+      </div>`;
+  }else if(builder.step===2){
+    next.textContent='Siguiente';
+    const guarniciones=todayProducts('guarniciones');
+    body.innerHTML=`
+      <div class="ub-sec">
+        <div class="head"><div class="ttl"><b>Paso 2: elige 2 guarniciones</b><small>${builder.guarniciones.length}/2 seleccionadas</small></div><span class="tag ${builder.guarniciones.length===2?'ok':'req'}">${builder.guarniciones.length===2?'Listo':'Req.'}</span></div>
+        <div class="ub-body">
+          ${guarniciones.map(p=>`<label class="ub-row"><span class="nm">${escapeHtml(p.nombre)} ${p.codigoVenta?'<small class="muted">#'+escapeHtml(p.codigoVenta)+'</small>':''}</span><input type="checkbox" ${builder.guarniciones.includes(p.nombre)?'checked':''} onchange="toggleBuilderGuarn('${escapeHtml(p.nombre)}',this.checked)"></label>`).join('')||'<div class="empty">Por el momento no hay guarniciones activas.</div>'}
+        </div>
+      </div>`;
+  }else if(builder.step===3){
+    next.textContent='Siguiente';
+    body.innerHTML=`
+      <div class="ub-sec">
+        <div class="head"><div class="ttl"><b>Paso 3: extras opcionales</b><small>${money(PRECIO_EXTRA)} cada uno</small></div><span class="tag ok">Opt.</span></div>
+        <div class="ub-body">
+          ${EXTRAS_PLATILLO.map(grupo=>`
+            <div class="extra-group">
+              <h5>${escapeHtml(grupo.grupo)}</h5>
+              ${grupo.items.map(x=>`<label class="ub-row"><span class="nm">${escapeHtml(x)} <small class="muted">+${money(PRECIO_EXTRA)}</small></span><input type="checkbox" ${builder.extras.includes(x)?'checked':''} onchange="toggleBuilderExtra('${escapeHtml(x)}',this.checked)"></label>`).join('')}
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }else if(builder.step===4){
+    next.textContent='Ver resumen';
+    body.innerHTML=`
+      <div class="ub-sec">
+        <div class="head"><div class="ttl"><b>Paso 4: notas</b><small>Opcional</small></div><span class="tag ok">Opt.</span></div>
+        <div class="ub-body"><textarea id="builderNotas" placeholder="Ej. sin picante, arroz aparte...">${escapeHtml(builder.notas)}</textarea></div>
+      </div>`;
+  }else{
+    next.textContent='Agregar '+money(builderTotal());
+    body.innerHTML=`
+      <div class="panel">
+        <h4>Paso 5: resumen final</h4>
+        <p><b>Platillo Individual</b> - ${money(builderTotal())}</p>
+        <p class="muted" style="margin-top:8px">Guiso: ${escapeHtml(builder.guiso)}<br>Guarniciones: ${builder.guarniciones.map(escapeHtml).join(', ')}${builder.extras.length?'<br>Extras: '+builder.extras.map(escapeHtml).join(', '):''}${builder.notas?'<br>Notas: '+escapeHtml(builder.notas):''}</p>
+      </div>`;
+  }
+}
+function toggleBuilderGuarn(g,checked){
+  if(checked){
+    if(builder.guarniciones.length>=2){
+      toast('Solo puedes elegir 2 guarniciones.');
+      renderBuilder();
+      return;
+    }
+    builder.guarniciones.push(g);
+  }else{
+    builder.guarniciones=builder.guarniciones.filter(x=>x!==g);
+  }
+  renderBuilder();
+}
+function toggleBuilderExtra(extra,checked){
+  if(checked&&!builder.extras.includes(extra))builder.extras.push(extra);
+  if(!checked)builder.extras=builder.extras.filter(x=>x!==extra);
+  renderBuilder();
+}
+function addIndividual(){
+  if(!builder.guiso||builder.guarniciones.length!==2)return toast('Completa guiso y 2 guarniciones.');
+  const guisoProd=productByName(builder.guiso);
+  addToCart({nombre:'Platillo Individual',precio:builderTotal(),qty:1,tipo:'Platillo',categoria:'platillo',codigoVenta:guisoProd?guisoProd.codigoVenta:'',guiso:builder.guiso,guarniciones:builder.guarniciones,extras:builder.extras,notas:builder.notas});
+  closeBuilder();
+}
+
+function addToCart(item){
+  const key=JSON.stringify({n:item.nombre,g:item.guiso||'',gu:item.guarniciones||[],ex:item.extras||[],no:item.notas||''});
+  const existing=cart.find(x=>x.key===key);
+  if(existing)existing.qty+=1;
+  else cart.push(Object.assign({key},item));
+  saveCart();
+  updateBadge();
+  renderCart();
+  pendingFolio=null;
+  toast('Agregado al pedido');
+}
+function saveCart(){saveObject('lc_cart',cart);}
+function cartCount(){return cart.reduce((s,i)=>s+i.qty,0);}
+function updateBadge(){
+  const count=cartCount();
+  document.getElementById('cartBadge').textContent=count;
+  const fab=document.getElementById('fabBtn');
+  if(fab)fab.textContent=count?'Ver pedido ('+count+')':'WhatsApp';
+  renderHistorial();
+}
+function openCart(){renderCart();document.getElementById('cartSheet').classList.add('open');}
+function closeCart(){document.getElementById('cartSheet').classList.remove('open');}
+function renderCart(){
+  const list=document.getElementById('cartList');
+  if(!cart.length){
+    list.innerHTML='<div class="empty">Tu carrito esta vacio.</div>';
+  }else{
+    list.innerHTML=cart.map((it,i)=>`
+      <div class="cart-item">
+        <div class="ci-info">
+          <h5>${escapeHtml(it.nombre)}</h5>
+          <div class="meta">${cartMeta(it)}</div>
+          <div class="row">
+            <div class="qty"><button type="button" onclick="changeQty(${i},-1)">-</button><span>${it.qty}</span><button type="button" onclick="changeQty(${i},1)">+</button></div>
+            <span class="price">${money(it.precio*it.qty)}</span>
+            <button class="rm" type="button" onclick="removeItem(${i})">Eliminar</button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+  const sub=cartSubtotal();
+  document.getElementById('cartSubtotal').textContent=money(sub);
+  updateDeliveryUI();
+}
+function cartMeta(it){
+  const parts=[];
+  if(it.tipo)parts.push(it.tipo);
+  if(it.codigoVenta)parts.push('Código: '+escapeHtml(it.codigoVenta));
+  if(it.presentacion)parts.push('Presentación: '+escapeHtml(it.presentacion));
+  if(it.guiso)parts.push('Guiso: '+escapeHtml(it.guiso));
+  if(it.guarniciones)parts.push('Guarniciones: '+it.guarniciones.map(escapeHtml).join(', '));
+  if(it.extras&&it.extras.length)parts.push('Extras: '+it.extras.map(escapeHtml).join(', '));
+  if(it.notas)parts.push('Notas: '+escapeHtml(it.notas));
+  return parts.join('\n');
+}
+function changeQty(i,delta){
+  cart[i].qty+=delta;
+  if(cart[i].qty<=0)cart.splice(i,1);
+  saveCart();updateBadge();renderCart();pendingFolio=null;
+}
+function removeItem(i){cart.splice(i,1);saveCart();updateBadge();renderCart();pendingFolio=null;}
+function clearCart(){
+  if(!cart.length)return toast('El carrito ya esta vacio.');
+  cart=[];saveCart();updateBadge();renderCart();pendingFolio=null;toast('Carrito vaciado');
+}
+function cartSubtotal(){return cart.reduce((s,i)=>s+(Number(i.precio)*Number(i.qty)),0);}
+function deliveryApplies(){
+  return document.getElementById('cTipo')?.value==='envio';
+}
+function resetDeliveryQuote(reason='confirm'){
+  deliveryQuote={status:'confirm',price:null,distanceKm:null,base:0,extra:0,zone:'',text:'Por confirmar segun ubicacion',reason};
+  updateDeliveryUI();
+}
+function deliveryAmount(){
+  return deliveryApplies()&&deliveryQuote.status==='quoted'?Number(deliveryQuote.price||0):0;
+}
+function deliveryText(){
+  if(!deliveryApplies())return 'No aplica';
+  if(deliveryQuote.status==='loading')return 'Calculando...';
+  if(deliveryQuote.status==='quoted')return money(deliveryQuote.price);
+  return 'Por confirmar segun ubicacion';
+}
+function deliverySummaryText(){
+  if(!deliveryApplies())return 'No aplica';
+  if(deliveryQuote.status==='quoted'){
+    const parts=[money(deliveryQuote.price)];
+    if(deliveryQuote.distanceKm)parts.push(Number(deliveryQuote.distanceKm).toFixed(1)+' km');
+    if(deliveryQuote.zone)parts.push('Zona: '+deliveryQuote.zone);
+    return parts.join(' - ');
+  }
+  return 'Por confirmar segun ubicacion';
+}
+function cartTotalWithDelivery(){
+  return cartSubtotal()+deliveryAmount();
+}
+function deliveryAddressPayload(){
+  const direccion=document.getElementById('cDir')?.value.trim()||'';
+  const colonia=document.getElementById('cCol')?.value.trim()||'';
+  const referencia=document.getElementById('cRef')?.value.trim()||'';
+  const destination=[direccion,colonia,referencia,'Ciudad Obregon, Sonora, Mexico'].filter(Boolean).join(', ');
+  return {destination,direccion,colonia,referencia};
+}
+function updateDeliveryUI(){
+  const sub=cartSubtotal();
+  const ship=document.getElementById('cartShipping');
+  const total=document.getElementById('cartTotal');
+  const label=document.getElementById('cartTotalLabel');
+  const quoteBox=document.getElementById('deliveryQuoteBox');
+  if(ship)ship.textContent=deliveryText();
+  if(total)total.textContent=money(sub+deliveryAmount());
+  if(label)label.textContent=deliveryApplies()&&deliveryQuote.status==='quoted'?'Total':'Total sin envio';
+  if(quoteBox){
+    let text='Envío: '+deliveryText();
+    if(deliveryApplies()&&deliveryQuote.status==='quoted'){
+      const details=[];
+      if(deliveryQuote.distanceKm)details.push(Number(deliveryQuote.distanceKm).toFixed(1)+' km');
+      if(deliveryQuote.zone)details.push('extra '+deliveryQuote.zone);
+      if(details.length)text+=' ('+details.join(', ')+')';
+    }
+    quoteBox.textContent=text;
+  }
+}
+function scheduleDeliveryQuote(){
+  clearTimeout(deliveryQuoteTimer);
+  deliveryQuoteTimer=setTimeout(()=>quoteDelivery().catch(e=>console.warn('Delivery quote skipped',e)),650);
+}
+async function quoteDelivery(){
+  if(!deliveryApplies()){
+    deliveryQuote={status:'none',price:0,distanceKm:null,base:0,extra:0,zone:'',text:'No aplica',reason:'pickup'};
+    updateDeliveryUI();
+    return deliveryQuote;
+  }
+  const payload=deliveryAddressPayload();
+  if(!payload.direccion||!DELIVERY_ENDPOINT){
+    resetDeliveryQuote(!payload.direccion?'missing-address':'missing-worker');
+    return deliveryQuote;
+  }
+  const token=++deliveryQuoteToken;
+  deliveryQuote=Object.assign({},deliveryQuote,{status:'loading'});
+  updateDeliveryUI();
+  try{
+    const res=await fetch(DELIVERY_ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if(!res.ok)throw new Error('worker '+res.status);
+    const data=await res.json();
+    if(token!==deliveryQuoteToken)return deliveryQuote;
+    if(data&&data.ok&&data.price!==null&&data.price!==undefined&&!data.overLimit){
+      deliveryQuote={
+        status:'quoted',
+        price:Number(data.price||0),
+        distanceKm:Number(data.distanceKm||0),
+        base:Number(data.base||0),
+        extra:Number(data.extra||0),
+        zone:data.zone||'',
+        text:data.text||'Envio calculado',
+        reason:'ok'
+      };
+    }else{
+      deliveryQuote={
+        status:'confirm',
+        price:null,
+        distanceKm:data&&data.distanceKm?Number(data.distanceKm):null,
+        base:0,
+        extra:0,
+        zone:data&&data.zone||'',
+        text:data&&data.text||'Por confirmar segun ubicacion',
+        reason:data&&data.overLimit?'over-limit':'worker-confirm'
+      };
+    }
+  }catch(err){
+    console.warn('Delivery quote failed; order will continue with envio por confirmar',err);
+    deliveryQuote={status:'confirm',price:null,distanceKm:null,base:0,extra:0,zone:'',text:'Por confirmar segun ubicacion',reason:'worker-failed'};
+  }
+  updateDeliveryUI();
+  return deliveryQuote;
+}
+
+function openCheckout(){
+  if(!cart.length)return toast('Agrega productos antes de revisar.');
+  applySavedClientData();
+  scheduleDeliveryQuote();
+  document.getElementById('checkoutModal').classList.add('open');
+}
+function closeCheckout(){document.getElementById('checkoutModal').classList.remove('open');}
+function toggleDeliveryFields(){
+  const envio=document.getElementById('cTipo').value==='envio';
+  document.querySelectorAll('.delivery-field').forEach(el=>el.classList.toggle('hide',!envio));
+  if(envio)scheduleDeliveryQuote();
+  else quoteDelivery().catch(e=>console.warn('Delivery reset skipped',e));
+  updateDeliveryUI();
+}
+function togglePaymentFields(){
+  const transferencia=document.getElementById('cPago')?.value==='transferencia';
+  document.querySelectorAll('.payment-cash').forEach(el=>el.classList.toggle('hide',transferencia));
+  document.querySelectorAll('.payment-transfer').forEach(el=>el.classList.toggle('hide',!transferencia));
+}
+function toggleProgramField(){
+  document.getElementById('progField').classList.toggle('hide',document.getElementById('cCuando').value!=='programado');
+}
+function mergeNonEmpty(base,patch){
+  const out=Object.assign({},base||{});
+  Object.keys(patch||{}).forEach(k=>{
+    const v=patch[k];
+    if(v!==undefined&&v!==null&&String(v).trim()!=='')out[k]=v;
+  });
+  return out;
+}
+function currentCustomerProfile(){
+  return {
+    nombre:document.getElementById('cName')?.value.trim()||'',
+    telefono:document.getElementById('cPhone')?.value.trim()||'',
+    email:checkoutEmail(),
+    tipoEntrega:document.getElementById('cTipo')?.value||'',
+    direccion:document.getElementById('cDir')?.value.trim()||'',
+    colonia:document.getElementById('cCol')?.value.trim()||'',
+    referencia:document.getElementById('cRef')?.value.trim()||'',
+    pago:document.getElementById('cPago')?.value||''
+  };
+}
+function saveCustomerProfile(profile){
+  clientePerfil=mergeNonEmpty(clientePerfil,profile);
+  clientePerfil.updatedAt=new Date().toISOString();
+  saveObject('lc_cliente_perfil',clientePerfil);
+}
+function applySavedClientData(){
+  const profile=clientePerfil||{};
+  const map={cName:'nombre',cPhone:'telefono',cEmail:'email',cTipo:'tipoEntrega',cDir:'direccion',cCol:'colonia',cRef:'referencia',cPago:'pago'};
+  Object.keys(map).forEach(id=>{
+    const el=document.getElementById(id);
+    const val=profile[map[id]];
+    if(el&&val&&!el.value)el.value=val;
+  });
+  toggleDeliveryFields();
+  togglePaymentFields();
+  toggleProgramField();
+}
+function paymentLabel(value){
+  return value==='transferencia'?'Transferencia':'Efectivo';
+}
+function paymentInfo(){
+  const metodo=document.getElementById('cPago')?.value||'efectivo';
+  return {
+    metodo,
+    metodoTexto:paymentLabel(metodo),
+    cambio:document.getElementById('cCambio')?.value.trim()||'',
+    banco:BANK_INFO.banco,
+    cuenta:BANK_INFO.cuenta,
+    titular:BANK_INFO.titular
+  };
+}
+function validateCheckout(){
+  const nombre=document.getElementById('cName').value.trim();
+  const tel=document.getElementById('cPhone').value.trim();
+  const tipo=document.getElementById('cTipo').value;
+  const dir=document.getElementById('cDir').value.trim();
+  if(!cart.length)return 'No hay productos en el carrito.';
+  if(!nombre)return 'El nombre es obligatorio.';
+  if(!tel)return 'El telefono es obligatorio.';
+  if(tipo==='envio'&&!dir)return 'La direccion es obligatoria para envio.';
+  if(document.getElementById('cCuando').value==='programado'&&!document.getElementById('cProg').value)return 'Selecciona la hora programada.';
+  return '';
+}
+function formatTicketDate(date){
+  return date.toLocaleDateString('es-MX',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+date.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',hour12:false});
+}
+function getDeliveryLabel(tipo){
+  return tipo==='envio'?'Envío a domicilio':'Recoger en sucursal';
+}
+function getCheckoutAddress(){
+  return [document.getElementById('cDir').value.trim(),document.getElementById('cCol').value.trim(),document.getElementById('cRef').value.trim()].filter(Boolean).join(', ');
+}
+function checkoutEmail(){
+  return document.getElementById('cEmail')?.value.trim()||'';
+}
+function getOrderDraft(folio,clubInfo=previewClubInfo(cartSubtotal())){
+  const tipo=document.getElementById('cTipo').value;
+  const fecha=new Date();
+  const sub=cartSubtotal();
+  const envio=deliveryAmount();
+  const envioConfirmar=tipo==='envio'&&deliveryQuote.status!=='quoted';
+  const pago=paymentInfo();
+  return {
+    folio,
+    fecha,
+    fechaTexto:formatTicketDate(fecha),
+    cliente:document.getElementById('cName').value.trim(),
+    tel:document.getElementById('cPhone').value.trim(),
+    email:checkoutEmail(),
+    entrega:getDeliveryLabel(tipo),
+    domicilio:tipo==='envio'?getCheckoutAddress():'No aplica',
+    direccion:document.getElementById('cDir').value.trim(),
+    colonia:document.getElementById('cCol').value.trim(),
+    referencia:document.getElementById('cRef').value.trim(),
+    tipoEntrega:tipo,
+    cuando:document.getElementById('cCuando').value,
+    horaProgramada:document.getElementById('cProg').value,
+    pago,
+    metodoPago:pago.metodo,
+    metodoPagoTexto:pago.metodoTexto,
+    notas:document.getElementById('cNotas').value.trim()||'-',
+    items:JSON.parse(JSON.stringify(cart)),
+    subtotal:sub,
+    envio,
+    envioTexto:deliverySummaryText(),
+    envioConfirmar,
+    envioDistanciaKm:deliveryQuote.distanceKm||null,
+    envioBase:deliveryQuote.base||0,
+    envioExtra:deliveryQuote.extra||0,
+    envioZona:deliveryQuote.zone||'',
+    envioEstado:deliveryQuote.status,
+    descuento:0,
+    total:sub+envio,
+    club:clubInfo
+  };
+}
+function itemLines(it){
+  const lines=[];
+  if(it.codigoVenta)lines.push('Código: '+it.codigoVenta);
+  if(it.presentacion)lines.push('Presentación: '+it.presentacion);
+  if(it.guiso)lines.push('Guiso: '+it.guiso);
+  if(it.guarniciones&&it.guarniciones.length)lines.push('Guarniciones: '+it.guarniciones.join(', '));
+  if(it.extras&&it.extras.length)lines.push('Extras: '+it.extras.join(', '));
+  if(it.notas)lines.push('Notas: '+it.notas);
+  return lines;
+}
+function ticketHtml(order){
+  return `
+    <div class="ticket-receipt" id="ticketReceipt">
+      <div class="tk-center">
+        <div class="tk-brand">LA CARZINA</div>
+        <div class="tk-sub">Asadero y Cocina<br>París #2199 esq. Jesús García, Col. Bellavista<br>Tel: 644 142 7883</div>
+      </div>
+      <div class="tk-line"></div>
+      <div class="tk-label">Pedido</div><div class="tk-value">#${order.folio}</div>
+      <div class="tk-label">Fecha</div><div class="tk-value">${escapeHtml(order.fechaTexto)}</div>
+      <div class="tk-label">Cliente</div><div class="tk-value">${escapeHtml(order.cliente)}</div>
+      <div class="tk-label">Tel</div><div class="tk-value">${escapeHtml(order.tel)}</div>
+      <div class="tk-label">Entrega</div><div class="tk-value">${escapeHtml(order.entrega)}</div>
+      <div class="tk-label">Domicilio</div><div class="tk-value">${escapeHtml(order.domicilio)}</div>
+      <div class="tk-label">Pago</div><div class="tk-value">${escapeHtml(order.metodoPagoTexto||'Efectivo')}${order.pago&&order.pago.cambio?'\nPaga con: '+escapeHtml(order.pago.cambio):''}${order.pago&&order.pago.metodo==='transferencia'?'\n'+escapeHtml(order.pago.banco)+'\n'+escapeHtml(order.pago.cuenta)+'\n'+escapeHtml(order.pago.titular):''}</div>
+      <div class="tk-label">Notas</div><div class="tk-value">${escapeHtml(order.notas)}</div>
+      <div class="tk-line"></div>
+      <div class="tk-label">Productos</div>
+      ${order.items.map(it=>`
+        <div class="tk-product">
+          <h4>${escapeHtml((it.qty>1?it.qty+' x ':'')+it.nombre)}</h4>
+          <div class="tk-price">${money(it.precio*it.qty)}</div>
+          <div class="tk-meta">${itemLines(it).map(escapeHtml).join('\n')}</div>
+        </div>`).join('')}
+      <div class="tk-line"></div>
+      <div class="tk-label">Subtotal</div><div class="tk-value">${money(order.subtotal||0)}</div>
+      <div class="tk-label">Envio</div><div class="tk-value">${escapeHtml(order.envioTexto||'Por confirmar segun ubicacion')}</div>
+      <div class="tk-total"><span>${order.envioConfirmar?'TOTAL SIN ENVIO':'TOTAL'}</span><span>${money(order.total)}</span></div>
+      ${order.club?`<div class="club-note"><b>CLUB LA CARZINA</b><br>Puntos ganados: ${order.club.ganados}<br>Puntos acumulados: ${order.club.acumulados}</div>`:''}
+      <div class="tk-foot">${order.envioConfirmar?'Envio por confirmar segun ubicacion.':''}<br><br>Gracias por tu pedido!<br>LA CARZINA — Asadero y Cocina</div>
+    </div>
+    <div class="ticket-hint">Puedes descargar, imprimir o enviar esta comanda por WhatsApp.</div>`;
+}
+async function reviewOrder(){
+  const err=validateCheckout();
+  if(err)return toast(err);
+  await quoteDelivery().catch(e=>console.warn('Delivery quote failed before review; continuing',e));
+  if(!pendingFolio)pendingFolio=generateFolioPreview();
+  document.getElementById('reviewBody').innerHTML=ticketHtml(getOrderDraft(pendingFolio));
+  document.getElementById('reviewModal').classList.add('open');
+}
+function closeReview(){document.getElementById('reviewModal').classList.remove('open');}
+// Demo: el folio incremental vive en localStorage para no reiniciarse al recargar.
+// Produccion real recomendada en Firestore:
+// coleccion: config
+// documento: folio_counter
+// campo: ultimo
+// Al confirmar pedido, usar transaccion atomica: leer ultimo, sumar 1 y guardar.
+function generateFolioPreview(){
+  const next=parseInt(localStorage.getItem('lc_folio')||'0',10)+1;
+  return String(next).padStart(4,'0');
+}
+function commitFolio(folio){
+  localStorage.setItem('lc_folio',String(parseInt(folio,10)||0));
+}
+function buildWhatsAppMessage(folio,clubInfo=previewClubInfo(cartSubtotal()),comandaUrl=''){
+  const order=getOrderDraft(folio,clubInfo);
+  let msg='LA CARZINA\n';
+  msg+='Asadero y Cocina\n';
+  msg+='París #2199 esq. Jesús García, Col. Bellavista\n';
+  msg+='Tel: 644 142 7883\n\n';
+  msg+='Pedido:\n#'+order.folio+'\n\n';
+  msg+='Fecha:\n'+order.fechaTexto+'\n\n';
+  msg+='Cliente:\n'+order.cliente+'\n\n';
+  msg+='Tel:\n'+order.tel+'\n\n';
+  msg+='Entrega:\n'+order.entrega+'\n\n';
+  msg+='Domicilio:\n'+order.domicilio+'\n\n';
+  msg+='Pago:\n'+(order.metodoPagoTexto||'Efectivo')+'\n';
+  if(order.pago&&order.pago.metodo==='efectivo'&&order.pago.cambio)msg+='Paga con: '+order.pago.cambio+'\n';
+  if(order.pago&&order.pago.metodo==='transferencia'){
+    msg+='Banco: '+order.pago.banco+'\n';
+    msg+='Cuenta/CLABE: '+order.pago.cuenta+'\n';
+    msg+='Titular: '+order.pago.titular+'\n';
+  }
+  msg+='\n';
+  msg+='Notas:\n'+order.notas+'\n\n';
+  msg+='PRODUCTOS\n\n';
+  order.items.forEach((it,i)=>{
+    msg+=(i+1)+'. '+((it.qty>1?it.qty+' x ':'')+it.nombre).toUpperCase()+'\n';
+    msg+=money(it.precio*it.qty)+'\n';
+    itemLines(it).forEach(line=>{msg+=line+'\n';});
+    msg+='\n';
+  });
+  msg+='SUBTOTAL\n'+money(order.subtotal||order.total)+'\n\n';
+  msg+='ENVIO\n'+(order.envioTexto||'Por confirmar segun ubicacion')+'\n';
+  if(order.envioDistanciaKm)msg+='Distancia: '+Number(order.envioDistanciaKm).toFixed(1)+' km\n';
+  if(order.envioZona)msg+='Zona extra: '+order.envioZona+'\n';
+  msg+='\n';
+  msg+=(order.envioConfirmar?'TOTAL SIN ENVIO':'TOTAL')+'\n'+money(order.total)+'\n\n';
+  if(order.club){
+    msg+='CLUB LA CARZINA\n';
+    msg+='Puntos ganados en este pedido: '+order.club.ganados+'\n';
+    msg+='Puntos acumulados: '+order.club.acumulados+'\n\n';
+  }
+  if(comandaUrl){
+    msg+='COMANDA PARA IMPRIMIR\n';
+    msg+=comandaUrl+'\n\n';
+  }
+  msg+='Gracias por tu pedido!\n';
+  msg+='LA CARZINA — Asadero y Cocina';
+  return msg;
+}
+async function downloadTicketPng(){
+  const ticket=document.getElementById('ticketReceipt');
+  if(!ticket)return toast('Primero revisa el pedido.');
+  try{
+    let canvas;
+    if(window.html2canvas){
+      canvas=await html2canvas(ticket,{backgroundColor:'#ffffff',scale:2});
+    }else{
+      canvas=renderTicketCanvasFromText(buildWhatsAppMessage(pendingFolio||generateFolioPreview()));
+    }
+    const a=document.createElement('a');
+    a.download='la-carzina-ticket-'+(pendingFolio||generateFolioPreview())+'.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+    toast('Ticket descargado.');
+  }catch(e){
+    const canvas=renderTicketCanvasFromText(buildWhatsAppMessage(pendingFolio||generateFolioPreview()));
+    const a=document.createElement('a');
+    a.download='la-carzina-ticket-'+(pendingFolio||generateFolioPreview())+'.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+    toast('Ticket descargado.');
+  }
+}
+function renderTicketCanvasFromText(text){
+  const raw=text.split('\n');
+  const lines=[];
+  raw.forEach(line=>{
+    if(line.length<=34){lines.push(line);return;}
+    let rest=line;
+    while(rest.length>34){
+      let cut=rest.lastIndexOf(' ',34);
+      if(cut<10)cut=34;
+      lines.push(rest.slice(0,cut));
+      rest=rest.slice(cut).trim();
+    }
+    lines.push(rest);
+  });
+  const canvas=document.createElement('canvas');
+  canvas.width=760;
+  canvas.height=Math.max(780,lines.length*32+80);
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle='#bbb';ctx.setLineDash([8,8]);ctx.lineWidth=3;ctx.strokeRect(20,20,canvas.width-40,canvas.height-40);
+  ctx.setLineDash([]);
+  ctx.fillStyle='#111';ctx.font='24px Courier New, monospace';
+  lines.forEach((line,i)=>ctx.fillText(line,42,62+i*32));
+  return canvas;
+}
+function printTicket(){
+  const ticket=document.getElementById('ticketReceipt');
+  if(!ticket)return toast('Primero revisa el pedido.');
+  document.body.classList.add('print-ticket');
+  window.print();
+  setTimeout(()=>document.body.classList.remove('print-ticket'),300);
+}
+async function prepareFirebaseOrder(clubInfo){
+  const fallbackFolio=pendingFolio||generateFolioPreview();
+  if(!window.lcFirebase||!window.lcFirebase.enabled||!window.lcFirebase.saveOrderBundle){
+    return {folio:fallbackFolio,comandaUrl:'',pedidoId:'',comandaId:'',remote:false};
+  }
+  try{
+    toast('Guardando comanda...');
+    return await window.lcFirebase.saveOrderBundle(getOrderDraft(fallbackFolio,clubInfo));
+  }catch(err){
+    console.error('Firebase order save failed',err);
+    const detail=String(err&&err.code||err&&err.message||err||'error-desconocido');
+    toast('Firebase: '+detail);
+    return {folio:fallbackFolio,comandaUrl:'',pedidoId:'',comandaId:'',remote:false,error:String(err&&err.message||err)};
+  }
+}
+async function sendWhatsAppOrder(){
+  const err=validateCheckout();
+  if(err)return toast(err);
+  let waWindow=null;
+  try{
+    waWindow=window.open('about:blank','_blank');
+    if(waWindow)waWindow.document.write('<p style="font-family:Arial;padding:18px">Preparando WhatsApp...</p>');
+  }catch(e){console.warn('Popup preopen failed',e);}
+  await quoteDelivery().catch(e=>console.warn('Delivery quote failed before WhatsApp; continuing',e));
+  const clubInfo=previewClubInfo(cartSubtotal());
+  const remote=await prepareFirebaseOrder(clubInfo).catch(err=>{
+    console.warn('Firebase/comanda skipped',err);
+    return {folio:pendingFolio||generateFolioPreview(),comandaUrl:'',pedidoId:'',comandaId:'',remote:false,error:String(err&&err.message||err)};
+  });
+  const folio=remote.folio||pendingFolio||generateFolioPreview();
+  if(!remote.comandaUrl)console.warn('Comanda link not generated; WhatsApp will continue',remote.error||'sin detalle');
+  const msg=buildWhatsAppMessage(folio,clubInfo,remote.comandaUrl||'');
+  try{
+    saveOrder(folio,clubInfo,remote);
+    commitFolio(folio);
+  }catch(e){
+    console.warn('Local order save failed; WhatsApp will continue',e);
+  }
+  const waUrl='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+  if(waWindow)waWindow.location.href=waUrl;
+  else{
+    const opened=window.open(waUrl,'_blank');
+    if(!opened)window.location.href=waUrl;
+  }
+  closeReview();closeCheckout();closeCart();
+  cart=[];saveCart();updateBadge();renderCart();
+  pendingFolio=null;
+  setTrackActive(folio,0);
+  renderPointsSection();
+  if(!clubInfo)maybePromptJoin();
+  toast('Pedido enviado #'+folio);
+}
+function updateClubAfterOrder(total,clubInfo){
+  const client=clubClient();
+  if(!client||!clubInfo)return;
+  try{
+    client.puntos=clubInfo.acumulados;
+    client.pedidos=Number(client.pedidos||0)+1;
+    client.totalGastado=Number(client.totalGastado||0)+Number(total||0);
+    saveClubClient(client);
+    if(window.lcFirebase&&window.lcFirebase.addPoints){
+      window.lcFirebase.addPoints(client,clubInfo.ganados,'pedido').catch(e=>console.warn('puntos_movimientos failed; clientes.puntos fallback already updated',e));
+    }
+  }catch(e){
+    console.warn('Points update failed; order flow continues',e);
+  }
+}
+function saveOrder(folio,clubInfo=null,remoteRefs=null){
+  const sub=cartSubtotal();
+  const envio=deliveryAmount();
+  const tel=document.getElementById('cPhone').value.trim();
+  const profile=currentCustomerProfile();
+  saveCustomerProfile(profile);
+  const pago=paymentInfo();
+  const order={
+    folio,fecha:new Date().toISOString(),cliente:document.getElementById('cName').value.trim(),tel,
+    tipo:document.getElementById('cTipo').value,items:JSON.parse(JSON.stringify(cart)),subtotal:sub,envio,total:sub+envio,estado:'Recibido',status:0,
+    envioTexto:deliverySummaryText(),envioConfirmar:deliveryApplies()&&deliveryQuote.status!=='quoted',envioDistanciaKm:deliveryQuote.distanceKm||null,envioBase:deliveryQuote.base||0,envioExtra:deliveryQuote.extra||0,envioZona:deliveryQuote.zone||'',envioEstado:deliveryQuote.status,
+    dir:document.getElementById('cDir').value.trim(),col:document.getElementById('cCol').value.trim(),
+    ref:document.getElementById('cRef').value.trim(),email:checkoutEmail(),notas:document.getElementById('cNotas').value.trim(),pago,
+    pedidoId:remoteRefs&&remoteRefs.pedidoId||'',comandaId:remoteRefs&&remoteRefs.comandaId||'',comandaUrl:remoteRefs&&remoteRefs.comandaUrl||''
+  };
+  upsertOrderLocal(order);
+  const existing=clientes.find(c=>c.tel===tel);
+  if(existing){existing.pedidos=Number(existing.pedidos||0)+1;existing.total=Number(existing.total||0)+sub;existing.ultimo=order.fecha;existing.nombre=order.cliente;existing.email=order.email||existing.email;existing.dir=order.dir||existing.dir;existing.col=order.col||existing.col;existing.ref=order.ref||existing.ref;}
+  else clientes.push({nombre:order.cliente,tel,email:order.email,dir:order.dir,col:order.col,ref:order.ref,pedidos:1,total:sub,ultimo:order.fecha});
+  saveObject('lc_clientes',clientes);
+  updateClubAfterOrder(sub,clubInfo);
+  renderHistorial();
+}
+function orderKey(o){return String(o.pedidoId||o.folio||o.fecha);}
+function upsertOrderLocal(order){
+  const key=orderKey(order);
+  orders=orders.filter(o=>orderKey(o)!==key);
+  orders.unshift(order);
+  saveObject('lc_orders',orders);
+  orderHistory=orderHistory.filter(o=>orderKey(o)!==key);
+  orderHistory.unshift({pedidoId:order.pedidoId,folio:order.folio,fecha:order.fecha,total:order.total,estado:order.estado,status:order.status,items:order.items,comandaUrl:order.comandaUrl});
+  saveObject('lc_hist',orderHistory);
+}
+function statusLabel(status,estado='Recibido'){
+  const n=Number(status);
+  if(!Number.isNaN(n)&&ORDER_STATUSES[n])return ORDER_STATUSES[n];
+  return estado||'Recibido';
+}
+function updateTrackingFromLastOrder(){
+  const latest=orders[0]||orderHistory[0];
+  if(latest)setTrackActive(latest.folio||'',Number(latest.status||0));
+}
+function setTrackActive(folio,estado){
+  const idx=typeof estado==='number'?estado:Math.max(0,ORDER_STATUSES.indexOf(statusLabel(null,estado)));
+  document.getElementById('trackFolio').textContent='Pedido #'+folio+' - '+statusLabel(idx,estado);
+  document.querySelectorAll('#trackSteps .s').forEach((s,i)=>{s.classList.toggle('active',i===idx);s.classList.toggle('done',i<idx);});
+}
+function renderHistoryHeader(){
+  const summary=document.getElementById('histPointsSummary');
+  const toggle=document.getElementById('histToggle');
+  const wrap=document.getElementById('histListWrap');
+  const client=clubClient();
+  if(summary)summary.textContent='Puntos del Club: '+Number(client&&client.puntos||0)+' pts';
+  if(toggle)toggle.textContent=historyListOpen?'Ocultar':'Ver';
+  if(wrap)wrap.classList.toggle('closed',!historyListOpen);
+}
+function toggleHistoryList(){
+  historyListOpen=!historyListOpen;
+  renderHistoryHeader();
+}
+function renderHistorial(){
+  const box=document.getElementById('histList');
+  renderHistoryHeader();
+  const unique=[];
+  const seen=new Set();
+  [...orders,...orderHistory].forEach(o=>{
+    const key=orderKey(o);
+    if(!key||seen.has(key))return;
+    seen.add(key);unique.push(o);
+  });
+  let html='';
+  if(cart.length){
+    html+=`
+    <div class="current-order">
+      <h4>Tu pedido actual</h4>
+      <ul>${cart.map(it=>`<li>${it.qty>1?it.qty+' x ':''}${escapeHtml(it.nombre)}</li>`).join('')}</ul>
+      <div class="sum"><span>${cartCount()} productos</span><span>${deliveryApplies()&&deliveryQuote.status==='quoted'?'Total':'Total sin envio'}: ${money(cartTotalWithDelivery())}</span></div>
+      <button class="btn btn-verde btn-block" type="button" onclick="openCart()">Ver pedido</button>
+    </div>`;
+  }
+  if(unique.length){
+    html+=unique.slice(0,8).map(o=>`
+      <div class="current-order">
+        <h4>Pedido #${escapeHtml(o.folio||'')}</h4>
+        <ul>${(o.items||[]).slice(0,4).map(it=>`<li>${it.qty>1?it.qty+' x ':''}${escapeHtml(it.nombre)}</li>`).join('')||'<li>Pedido guardado</li>'}</ul>
+        <div class="sum"><span>${escapeHtml(statusLabel(o.status,o.estado))}</span><span>${escapeHtml(o.envioTexto||'Envio por confirmar')}</span></div>
+        <div class="sum"><span>${o.envioConfirmar?'Total sin envio':'Total'}</span><span>${money(o.total||0)}</span></div>
+        ${o.comandaUrl?`<button class="btn btn-light btn-block" type="button" onclick="window.open('${escapeHtml(o.comandaUrl)}','_blank')">Ver comanda</button>`:''}
+      </div>`).join('');
+    if(unique.length>3)html+='<div class="hist-more">Desliza para ver más pedidos</div>';
+  }
+  if(!html)html='<div class="empty" style="background:#fff;border-radius:14px">Haz tu primer pedido para verlo aqui.</div>';
+  box.innerHTML=html;
+}
+function fabClick(){
+  if(cart.length)openCart();
+  else window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hola, quiero informacion del menu de La Carzina.'),'_blank');
+}
+
+function copyClick(){
+  copyClicks++;clearTimeout(copyTimer);copyTimer=setTimeout(()=>copyClicks=0,2000);
+  if(copyClicks>=3){copyClicks=0;openAdminLogin();}
+}
+function footLogoClick(){
+  footLogoClicks++;clearTimeout(footTimer);footTimer=setTimeout(()=>footLogoClicks=0,2500);
+  if(footLogoClicks>=5){footLogoClicks=0;openAdminLogin();}
+}
+function openAdminLogin(){document.getElementById('adminLoginModal').classList.add('open');}
+function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('open');}
+function adminLogin(){
+  const u=document.getElementById('admU').value.trim();
+  const p=document.getElementById('admP').value;
+  if(u==='admincarzina'&&p==='Carzina2026'){
+    closeAdminLogin();document.getElementById('adminPanel').classList.add('open');setAdmTab('resumen');
+  }else toast('Acceso denegado.');
+}
+function closeAdmin(){document.getElementById('adminPanel').classList.remove('open');}
+function setAdmTab(tab){
+  document.querySelectorAll('#admTabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  const body=document.getElementById('admBody');
+  if(tab==='resumen')body.innerHTML=renderAdmResumen();
+  if(tab==='pedidos'){body.innerHTML=renderAdmPedidos();refreshAdminOrdersFromFirebase();}
+  if(tab==='menu')body.innerHTML=renderAdmMenu();
+  if(tab==='catalogo')body.innerHTML=renderAdmCatalogo();
+  if(tab==='clientes')body.innerHTML=renderAdmClientes();
+  if(tab==='config')body.innerHTML=renderAdmConfig();
+}
+function refreshAdminOrdersFromFirebase(){
+  if(!window.lcFirebase||!window.lcFirebase.listRecentOrders)return;
+  window.lcFirebase.listRecentOrders().then(remoteOrders=>{
+    let changed=false;
+    remoteOrders.forEach(o=>{
+      if(!orders.some(x=>orderKey(x)===orderKey(o))){orders.push(o);changed=true;}
+    });
+    if(changed){
+      orders.sort((a,b)=>new Date(b.fecha||b.createdAt||0)-new Date(a.fecha||a.createdAt||0));
+      saveObject('lc_orders',orders);
+      document.getElementById('admBody').innerHTML=renderAdmPedidos();
+      renderHistorial();
+    }
+  }).catch(e=>console.warn('Firestore pedidos read skipped; using local orders',e));
+}
+function renderAdmResumen(){
+  const hoy=new Date().toDateString();
+  const pedHoy=orders.filter(o=>new Date(o.fecha).toDateString()===hoy);
+  const ventHoy=pedHoy.reduce((s,o)=>s+o.total,0);
+  const ticket=pedHoy.length?Math.round(ventHoy/pedHoy.length):0;
+  return `<div class="stat-grid">
+    <div class="stat"><div class="lbl">Pedidos hoy</div><div class="val">${pedHoy.length}</div></div>
+    <div class="stat"><div class="lbl">Ventas hoy</div><div class="val">${money(ventHoy)}</div></div>
+    <div class="stat"><div class="lbl">Ticket promedio</div><div class="val">${money(ticket)}</div></div>
+    <div class="stat"><div class="lbl">Clientes</div><div class="val">${clientes.length}</div></div>
+  </div>
+  <div class="panel"><h4>Estado</h4><p class="muted">Los cambios del admin se guardan en localStorage y afectan el menú de hoy, el catálogo, el ticket y WhatsApp.</p></div>`;
+}
+function renderAdmPedidos(){
+  if(!orders.length)return '<div class="empty">No hay pedidos todavia. Los pedidos enviados apareceran aqui.</div>';
+  return orders.map((o,i)=>`
+    <div class="order-row">
+      <div class="top"><b>#${o.folio}</b><span>${escapeHtml(o.cliente)}</span><span class="est">${escapeHtml(o.estado)}</span></div>
+      <div class="info">${escapeHtml(o.tel)} - ${o.tipo==='envio'?'Envio':'Recoger'} - ${escapeHtml(o.envioTexto||'Envio por confirmar')} - ${money(o.total)}\n${new Date(o.fecha).toLocaleString('es-MX')}</div>
+      <div class="acts">
+        <select onchange="updateOrderStatus(${i},this.value)">
+          ${ADMIN_STATUSES.map(e=>`<option ${statusLabel(o.status,o.estado)===e?'selected':''}>${e}</option>`).join('')}
+        </select>
+        <button type="button" onclick="window.open('https://wa.me/52${o.tel.replace(/\D/g,'')}','_blank')">WhatsApp</button>
+      </div>
+    </div>`).join('');
+}
+function updateOrderStatus(i,status){
+  const idx=ORDER_STATUSES.indexOf(status);
+  const numeric=idx>=0?idx:4;
+  orders[i].estado=status;
+  orders[i].status=numeric;
+  orders[i].updatedAt=new Date().toISOString();
+  saveObject('lc_orders',orders);
+  const h=orderHistory.find(x=>x.folio===orders[i].folio||x.pedidoId===orders[i].pedidoId);
+  if(h){h.estado=status;h.status=numeric;}
+  saveObject('lc_hist',orderHistory);
+  if(window.lcFirebase&&window.lcFirebase.updateOrderStatus&&orders[i].pedidoId){
+    window.lcFirebase.updateOrderStatus(orders[i].pedidoId,numeric,status).catch(e=>console.warn('Firestore status update failed',e));
+  }
+  renderHistorial();updateTrackingFromLastOrder();setAdmTab('pedidos');toast('Estado actualizado');
+}
+function catalogGroup(cats){
+  const list=Array.isArray(cats)?cats:[cats];
+  return catalogoProductos.filter(p=>list.includes(p.categoria));
+}
+function menuSelectionGroup(title,cats,key){
+  const selected=menuHoy[key]||[];
+  return `<div class="panel">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <h4 style="flex:1;margin:0">${title}</h4>
+      <button class="btn btn-verde" type="button" style="padding:8px 12px;font-size:12px" onclick="saveAdminMenu()">Guardar</button>
+    </div>
+    <div class="menu-edit" style="border-bottom:0;color:var(--muted);font-weight:800">
+      <span></span><span>Producto</span><span>Código</span><span>Precio</span><span>Agot.</span>
+    </div>
+    ${catalogGroup(cats).map(p=>`
+      <div class="menu-edit">
+        <input type="checkbox" data-adm-menu="${key}" value="${escapeHtml(p.id)}" ${selected.includes(p.id)?'checked':''} ${!p.activo?'disabled':''}>
+        <span class="nm">${escapeHtml(p.nombre)}${!p.activo?' <small class="muted">(inactivo)</small>':''}</span>
+        <span class="mini-label">${p.codigoVenta?escapeHtml(p.codigoVenta):'-'}</span>
+        <span class="mini-label">${catalogPriceLabel(p)}</span>
+        <label style="margin:0;font-size:11px"><input type="checkbox" data-adm-sold="${escapeHtml(p.id)}" ${p.agotado?'checked':''}> Agotado</label>
+      </div>`).join('')||'<div class="empty">No hay productos en esta categoría.</div>'}
+  </div>`;
+}
+function catalogPriceLabel(p){
+  if(p.precioMedio||p.precioKilo)return `${p.precioMedio?money(p.precioMedio):'-'} / ${p.precioKilo?money(p.precioKilo):'-'}`;
+  if(p.precioMedioLitro||p.precioLitro)return `${p.precioMedioLitro?money(p.precioMedioLitro):'-'} / ${p.precioLitro?money(p.precioLitro):'-'}`;
+  return p.precioIndividual?money(p.precioIndividual):'-';
+}
+function renderAdmMenu(){
+  return `<div class="panel">
+    <h4>Menú de hoy</h4>
+    <p class="muted" style="margin:0 0 10px">Selecciona los productos disponibles y presiona Guardar para publicarlos en la página.</p>
+    ${adminMenuSaveStatus?`<div class="empty" style="text-align:left;background:#fff;border-radius:12px;margin-bottom:10px">${escapeHtml(adminMenuSaveStatus)}</div>`:''}
+    <label style="display:flex;align-items:center;gap:8px;margin:0 0 10px"><input id="admPublicado" type="checkbox" ${menuHoy.publicado?'checked':''}> Publicar menú de hoy</label>
+    <label for="admMensaje">Mensaje del día</label>
+    <textarea id="admMensaje" placeholder="Ej. Menú sujeto a disponibilidad.">${escapeHtml(menuHoy.mensajeDelDia||'')}</textarea>
+    <p class="muted" style="margin-top:8px">Actualizado: ${formatUpdated()}</p>
+    <button class="btn btn-verde btn-block" type="button" onclick="saveAdminMenu()" style="margin-top:10px">Guardar</button>
+  </div>
+  ${menuSelectionGroup('Guisos disponibles hoy','guisos','guisosDisponibles')}
+  ${menuSelectionGroup('Guarniciones disponibles hoy','guarniciones','guarnicionesDisponibles')}
+  ${menuSelectionGroup('Caldos disponibles hoy','caldos','caldosDisponibles')}
+  ${menuSelectionGroup('Paquetes disponibles hoy','paquetes','paquetesDisponibles')}
+  ${menuSelectionGroup('Extras disponibles hoy',['bebidas','postres'],'extrasDisponibles')}
+  <div class="panel">
+    <button class="btn btn-verde btn-block" type="button" onclick="saveAdminMenu()">Guardar menú de hoy</button>
+    <button class="btn btn-light btn-block" type="button" onclick="previewAdminMenu()" style="margin-top:8px">Ver vista cliente</button>
+  </div>`;
+}
+async function saveAdminMenu(){
+  const keys=['guisosDisponibles','guarnicionesDisponibles','caldosDisponibles','paquetesDisponibles','extrasDisponibles'];
+  keys.forEach(key=>{
+    menuHoy[key]=Array.from(document.querySelectorAll(`[data-adm-menu="${key}"]`)).filter(i=>i.checked).map(i=>i.value);
+  });
+  menuHoy.publicado=document.getElementById('admPublicado').checked;
+  menuHoy.mensajeDelDia=document.getElementById('admMensaje').value.trim();
+  menuHoy.actualizadoEn=new Date().toISOString();
+  document.querySelectorAll('[data-adm-sold]').forEach(input=>{
+    const p=productById(input.dataset.admSold);
+    if(p)p.agotado=input.checked;
+  });
+  saveCatalog();
+  saveMenuHoy();
+  renderTodayMenu();
+  renderShareSelector();
+  renderSides();
+  renderCaldo();
+  renderAntojitos();
+  if(!window.lcFirebase||!window.lcFirebase.enabled||!window.lcFirebase.saveMenuConfig){
+    adminMenuSaveStatus='No se publicó para todos: Firebase no está activo en esta página. Se guardó solo en este navegador.';
+    setAdmTab('menu');
+    toast('No se publicó para todos. Revisa Firebase.');
+    return false;
+  }
+  try{
+    toast('Guardando menú...');
+    await window.lcFirebase.saveMenuConfig({menuHoy,catalogoProductos});
+  }catch(e){
+    console.warn('Firestore menu save failed; local menu already saved',e);
+    adminMenuSaveStatus='No se publicó para todos: Firestore rechazó el guardado. Publica las reglas nuevas y vuelve a guardar.';
+    setAdmTab('menu');
+    toast('No se publicó para todos. Revisa reglas de Firebase.');
+    return false;
+  }
+  adminMenuSaveStatus='Guardado correcto en la nube. El menú ya se actualiza para clientes nuevos.';
+  setAdmTab('menu');
+  toast('Guardado correcto');
+  return true;
+}
+async function previewAdminMenu(){
+  const saved=await saveAdminMenu();
+  if(!saved)return;
+  renderTodayMenu();
+  renderShareSelector();
+  renderSides();
+  renderCaldo();
+  closeAdmin();
+  scrollToId('menuDia');
+}
+function numOrNull(value){
+  return value===''?null:Number(value);
+}
+function productIdFromName(name){
+  return String(name||'producto').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now();
+}
+function catalogRow(p,i){
+  const shouldOpen=p.id===newCatalogProductId;
+  return `<details class="catalog-row" data-cat-row="${escapeHtml(p.id)}" ${shouldOpen?'open':''}>
+    <summary>
+      <div class="cat-title">
+        <b>${escapeHtml(p.nombre)}</b>
+        <small>${escapeHtml(p.categoria)} · ${p.codigoVenta?'Código '+escapeHtml(p.codigoVenta):'Sin código'} · ${catalogPriceLabel(p)}</small>
+      </div>
+      <div class="cat-badges">
+        <span class="${p.activo?'':'muted'}">${p.activo?'Activo':'Inactivo'}</span>
+        ${p.agotado?'<span class="sold">Agotado</span>':''}
+        ${p.destacado?'<span>Recomendado</span>':''}
+      </div>
+    </summary>
+    <div class="cat-edit">
+    <div class="cols">
+      <label>Nombre<input data-cat-field="nombre" value="${escapeHtml(p.nombre)}"></label>
+      <label>Código venta<input data-cat-field="codigoVenta" value="${escapeHtml(p.codigoVenta||'')}" placeholder="Ej. 754"></label>
+      <label>Categoría<select data-cat-field="categoria">
+        ${['guisos','guarniciones','caldos','paquetes','bebidas','postres'].map(c=>`<option value="${c}" ${p.categoria===c?'selected':''}>${c}</option>`).join('')}
+      </select></label>
+      <label>Unidad<input data-cat-field="unidad" value="${escapeHtml(p.unidad||'')}"></label>
+      <label>Precio 1/2 kg<input type="number" step="0.5" data-cat-field="precioMedio" value="${p.precioMedio??''}"></label>
+      <label>Precio 1 kg<input type="number" step="0.5" data-cat-field="precioKilo" value="${p.precioKilo??''}"></label>
+      <label>Precio 1/2 L<input type="number" step="0.5" data-cat-field="precioMedioLitro" value="${p.precioMedioLitro??''}"></label>
+      <label>Precio 1 L<input type="number" step="0.5" data-cat-field="precioLitro" value="${p.precioLitro??''}"></label>
+      <label>Precio individual<input type="number" step="0.5" data-cat-field="precioIndividual" value="${p.precioIndividual??''}"></label>
+      <label>Imagen<input data-cat-field="imagen" value="${escapeHtml(p.imagen||'')}"></label>
+      <label class="full">Descripción<textarea data-cat-field="descripcion">${escapeHtml(p.descripcion||'')}</textarea></label>
+      <label><input type="checkbox" data-cat-field="activo" ${p.activo?'checked':''}> Activo</label>
+      <label><input type="checkbox" data-cat-field="agotado" ${p.agotado?'checked':''}> Agotado</label>
+      <label><input type="checkbox" data-cat-field="destacado" ${p.destacado?'checked':''}> Recomendado</label>
+    </div>
+    <div class="acts" style="margin-top:10px"><button type="button" onclick="deleteCatalogProduct('${escapeHtml(p.id)}')">Eliminar</button></div>
+    </div>
+  </details>`;
+}
+function renderAdmCatalogo(){
+  return `<div class="panel">
+    <h4>Catálogo de productos</h4>
+    <p class="muted">El código de venta viene de la tabla de Word y se imprime en carrito, ticket y WhatsApp cuando está disponible.</p>
+    <button class="btn btn-verde btn-block" type="button" onclick="addCatalogAdminProduct()">Agregar producto</button>
+    <button class="btn btn-light btn-block" type="button" onclick="resetCatalogAdmin()" style="margin-top:8px">Restaurar catálogo base</button>
+  </div>
+  ${catalogoProductos.map(catalogRow).join('')}
+  <button class="btn btn-verde btn-block" type="button" onclick="saveCatalogAdmin()">Guardar catálogo</button>`;
+}
+function readCatalogAdminRows(){
+  return Array.from(document.querySelectorAll('[data-cat-row]')).map(row=>{
+    const get=f=>row.querySelector(`[data-cat-field="${f}"]`);
+    const nombre=get('nombre').value.trim();
+    return {
+      id:row.dataset.catRow||productIdFromName(nombre),
+      codigoVenta:get('codigoVenta').value.trim(),
+      nombre:nombre||'Producto sin nombre',
+      categoria:get('categoria').value,
+      descripcion:get('descripcion').value.trim(),
+      precioMedio:numOrNull(get('precioMedio').value),
+      precioKilo:numOrNull(get('precioKilo').value),
+      precioMedioLitro:numOrNull(get('precioMedioLitro').value),
+      precioLitro:numOrNull(get('precioLitro').value),
+      precioIndividual:numOrNull(get('precioIndividual').value),
+      unidad:get('unidad').value.trim(),
+      activo:get('activo').checked,
+      agotado:get('agotado').checked,
+      imagen:get('imagen').value.trim(),
+      destacado:get('destacado').checked
+    };
+  });
+}
+function saveCatalogAdmin(){
+  catalogoProductos=readCatalogAdminRows();
+  saveCatalog();
+  saveMenuHoy();
+  renderTodayMenu();
+  renderShareSelector();
+  renderSides();
+  renderCaldo();
+  setAdmTab('catalogo');
+  toast('Catálogo guardado');
+}
+function addCatalogAdminProduct(){
+  if(document.querySelector('[data-cat-row]'))catalogoProductos=readCatalogAdminRows();
+  const id=productIdFromName('nuevo-producto');
+  newCatalogProductId=id;
+  catalogoProductos.unshift({id,codigoVenta:'',nombre:'Nuevo producto',categoria:'guisos',descripcion:'',precioMedio:null,precioKilo:null,precioMedioLitro:null,precioLitro:null,precioIndividual:null,unidad:'kg',activo:true,agotado:false,imagen:'',destacado:false});
+  saveCatalog();
+  setAdmTab('catalogo');
+  setTimeout(()=>{
+    const row=document.querySelector(`[data-cat-row="${id}"]`);
+    if(!row)return;
+    row.open=true;
+    row.scrollIntoView({behavior:'smooth',block:'center'});
+    const input=row.querySelector('[data-cat-field="nombre"]');
+    if(input){input.focus();input.select();}
+  },0);
+  toast('Producto nuevo listo para editar');
+}
+function deleteCatalogProduct(id){
+  if(!confirm('¿Eliminar este producto del catálogo?'))return;
+  catalogoProductos=catalogoProductos.filter(p=>p.id!==id);
+  ['guisosDisponibles','guarnicionesDisponibles','caldosDisponibles','paquetesDisponibles','extrasDisponibles'].forEach(key=>{
+    menuHoy[key]=(menuHoy[key]||[]).filter(x=>x!==id);
+  });
+  saveCatalog();
+  saveMenuHoy();
+  setAdmTab('catalogo');
+  toast('Producto eliminado');
+}
+function resetCatalogAdmin(){
+  if(!confirm('¿Restaurar el catálogo base de La Carzina?'))return;
+  catalogoProductos=mergeCatalog(CATALOGO_PRODUCTOS_DEFAULT);
+  saveCatalog();
+  setAdmTab('catalogo');
+  toast('Catálogo base restaurado');
+}
+function renderAdmClientes(){
+  const club=clubClient();
+  const rows=clientes.map(c=>{
+    const same=club&&normalizePhone(c.tel)===normalizePhone(club.telefono);
+    return Object.assign({},c,{
+      puntos:same?Number(club.puntos||0):0,
+      totalGastado:same?Number(club.totalGastado||0):Number(c.total||0),
+      premiosCanjeados:same&&Array.isArray(club.premiosCanjeados)?club.premiosCanjeados:[],
+      club:same
+    });
+  });
+  if(club&&!rows.some(c=>normalizePhone(c.tel)===normalizePhone(club.telefono))){
+    rows.unshift({nombre:club.nombre,tel:club.telefono,pedidos:club.pedidos,totalGastado:club.totalGastado,puntos:club.puntos,premiosCanjeados:club.premiosCanjeados,club:true,ultimo:new Date().toISOString()});
+  }
+  if(!rows.length)return '<div class="empty">Aun no hay clientes registrados.</div>';
+  return rows.map((c,i)=>`
+    <div class="order-row">
+      <div class="top"><b>${escapeHtml(c.nombre.charAt(0).toUpperCase())}</b><span>${escapeHtml(c.nombre)}</span></div>
+      <div class="info">${escapeHtml(c.tel)}\n${Number(c.puntos||0)} puntos - ${Number(c.pedidos||0)} pedidos - ${money(c.totalGastado||c.total||0)} total\nPremios canjeados: ${(c.premiosCanjeados||[]).length}</div>
+      <div class="acts">
+        <button type="button" onclick="editClientPoints('${normalizePhone(c.tel)}','${escapeHtml(c.nombre)}')">Editar puntos</button>
+        <button type="button" onclick="window.open('https://wa.me/52${String(c.tel).replace(/\D/g,'')}','_blank')">Enviar WhatsApp</button>
+      </div>
+    </div>`).join('');
+}
+function editClientPoints(phone,nombre){
+  let client=clubClient();
+  if(!client||normalizePhone(client.telefono)!==phone){
+    client={nombre:nombre||'Cliente',telefono:phone,cumple:'',promos:true,puntos:0,pedidos:0,totalGastado:0,premiosCanjeados:[]};
+  }
+  const delta=prompt('Sumar o restar puntos. Ejemplo: 20 o -10', '0');
+  if(delta===null)return;
+  const n=parseInt(delta,10);
+  if(Number.isNaN(n))return toast('Cantidad invalida.');
+  client.puntos=Math.max(0,Number(client.puntos||0)+n);
+  saveClubClient(client);
+  setAdmTab('clientes');
+  toast('Puntos actualizados');
+}
+function renderAdmConfig(){
+  return `<div class="panel">
+    <label>Nombre del restaurante</label><input id="cfgN" value="${escapeHtml(config.nombre)}">
+    <label>WhatsApp</label><input id="cfgW" value="${escapeHtml(config.wa)}">
+    <label>Direccion</label><input id="cfgD" value="${escapeHtml(config.dir)}">
+    <label>Facebook</label><input id="cfgF" value="${escapeHtml(config.fb)}">
+    <label>Instagram</label><input id="cfgI" value="${escapeHtml(config.ig)}">
+  </div>
+  <button class="btn btn-verde btn-block" type="button" onclick="saveAdmConfig()">Guardar configuracion</button>`;
+}
+function saveAdmConfig(){
+  config={nombre:document.getElementById('cfgN').value,wa:document.getElementById('cfgW').value,dir:document.getElementById('cfgD').value,fb:document.getElementById('cfgF').value,ig:document.getElementById('cfgI').value};
+  saveObject('lc_config',config);
+  toast('Configuracion guardada');
+}
+
+init();
+</script>
+<script type="module">
+const firebaseConfig=window.LC_FIREBASE_CONFIG||{};
+const hasFirebaseConfig=!!(firebaseConfig.apiKey&&firebaseConfig.projectId&&firebaseConfig.appId);
+const domain=(window.LC_DOMAIN||'https://lacarzina.com').replace(/\/$/,'');
+
+function secureId(prefix='cmd'){
+  const bytes=new Uint8Array(18);
+  crypto.getRandomValues(bytes);
+  return prefix+'_'+Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function normalizePhoneForId(phone){
+  const clean=String(phone||'').replace(/\D/g,'');
+  return clean?'tel_'+clean:'cliente_'+secureId('anon');
+}
+function plainOrder(order){
+  return JSON.parse(JSON.stringify(order));
+}
+
+if(!hasFirebaseConfig){
+  window.lcFirebase={enabled:false,reason:'Falta pegar LC_FIREBASE_CONFIG'};
+}else{
+  const [{initializeApp},firestore]=await Promise.all([
+    import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),
+    import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js')
+  ]);
+  const {getFirestore,doc,getDoc,setDoc,updateDoc,runTransaction,serverTimestamp,Timestamp,arrayUnion,increment,collection,getDocs,query,orderBy,limit}=firestore;
+  const authMod=await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js');
+  const {getAuth,GoogleAuthProvider,signInWithPopup}=authMod;
+  const app=initializeApp(firebaseConfig);
+  const db=getFirestore(app);
+  const auth=getAuth(app);
+  const googleProvider=new GoogleAuthProvider();
+
+  async function nextFolio(){
+    const counterRef=doc(db,'config','folio_counter');
+    const next=await runTransaction(db,async tx=>{
+      const snap=await tx.get(counterRef);
+      const last=snap.exists()?Number(snap.data().ultimo||0):0;
+      const value=last+1;
+      tx.set(counterRef,{ultimo:value,updatedAt:serverTimestamp()},{merge:true});
+      return value;
+    });
+    return String(next).padStart(4,'0');
+  }
+
+  async function saveOrderBundle(orderDraft){
+    let folio=orderDraft.folio||'';
+    try{folio=await nextFolio();}catch(e){console.warn('folio_counter failed; using local folio',e);}
+    const pedidoId=secureId('ped');
+    const comandaId=secureId('cmd');
+    const clienteId=normalizePhoneForId(orderDraft.tel);
+    const comandaUrl=domain+'/comanda.html?id='+encodeURIComponent(comandaId);
+    const nowIso=new Date().toISOString();
+    const expiresAt=Timestamp.fromDate(new Date(Date.now()+30*24*60*60*1000));
+    const order=Object.assign({},plainOrder(orderDraft),{folio});
+    const clientRef=doc(db,'clientes',clienteId);
+
+    await setDoc(clientRef,{
+      nombre:order.cliente||'',
+      telefono:order.tel||'',
+      direccion:order.direccion||'',
+      colonia:order.colonia||'',
+      referencia:order.referencia||'',
+      domicilio:order.domicilio||'',
+      email:order.email||'',
+      datosReutilizables:{
+        nombre:order.cliente||'',
+        telefono:order.tel||'',
+        direccion:order.direccion||'',
+        colonia:order.colonia||'',
+        referencia:order.referencia||'',
+        email:order.email||''
+      },
+      fechaRegistro:serverTimestamp(),
+      ultimaActualizacion:serverTimestamp(),
+      historialPedidos:arrayUnion({pedidoId,folio,total:order.total,fecha:nowIso})
+    },{merge:true}).catch(e=>console.warn('clientes write failed; order continues',e));
+
+    await setDoc(doc(db,'pedidos',pedidoId),Object.assign({},order,{
+      clienteId,
+      pedidoId,
+      comandaId,
+      comandaUrl,
+      estado:'Recibido',
+      status:0,
+      createdAt:serverTimestamp(),
+      updatedAt:serverTimestamp()
+    })).catch(e=>console.warn('pedidos write failed; WhatsApp continues',e));
+
+    let comandaSaved=false;
+    await setDoc(doc(db,'comandas',comandaId),{
+      comandaId,
+      pedidoId,
+      clienteId,
+      folio,
+      restaurante:'LA CARZINA',
+      subtitulo:'Asadero y Cocina',
+      direccionRestaurante:'París #2199 esq. Jesús García, Col. Bellavista',
+      telefonoRestaurante:'644 142 7883',
+      order,
+      total:order.total,
+      public:true,
+      createdAt:serverTimestamp(),
+      expiresAt
+    }).then(()=>{comandaSaved=true;}).catch(e=>console.warn('comandas write failed; WhatsApp continues without print link',e));
+
+    return {folio,pedidoId,comandaId:comandaSaved?comandaId:'',comandaUrl:comandaSaved?comandaUrl:'',remote:true};
+  }
+
+  async function updateOrderStatusRemote(pedidoId,status,estado){
+    await updateDoc(doc(db,'pedidos',pedidoId),{status,estado,updatedAt:serverTimestamp()});
+  }
+
+  async function listRecentOrders(){
+    const snap=await getDocs(query(collection(db,'pedidos'),orderBy('createdAt','desc'),limit(30)));
+    return snap.docs.map(d=>{
+      const data=d.data();
+      return Object.assign({},data,{pedidoId:data.pedidoId||d.id,fecha:data.fecha||data.createdAt?.toDate?.().toISOString?.()||new Date().toISOString()});
+    });
+  }
+
+  async function addPoints(client,points,reason){
+    if(!client||!points)return;
+    const clienteId=normalizePhoneForId(client.telefono);
+    try{
+      await setDoc(doc(db,'puntos_movimientos',secureId('pts')),{
+        clienteId,
+        telefono:client.telefono||'',
+        puntos:Number(points||0),
+        razon:reason||'pedido',
+        createdAt:serverTimestamp()
+      });
+    }catch(e){
+      console.warn('puntos_movimientos blocked; updating clientes.puntos',e);
+    }
+    await setDoc(doc(db,'clientes',clienteId),{
+      puntos:Number(client.puntos||0),
+      ultimaActualizacion:serverTimestamp()
+    },{merge:true});
+  }
+
+  async function saveMenuConfig(payload){
+    const data={
+      menuHoy:plainOrder(payload.menuHoy||{}),
+      catalogoProductos:plainOrder(payload.catalogoProductos||[]),
+      updatedAt:serverTimestamp()
+    };
+    const writes=await Promise.allSettled([
+      setDoc(doc(db,'config','menu_hoy'),data,{merge:true}),
+      setDoc(doc(db,'public_config','menu_hoy'),data,{merge:true})
+    ]);
+    const ok=writes.some(r=>r.status==='fulfilled');
+    if(!ok)throw writes[0].reason||new Error('menu_config_write_failed');
+    writes.forEach(r=>{if(r.status==='rejected')console.warn('menu config mirror failed',r.reason);});
+  }
+
+  async function loadMenuConfig(){
+    const snap=await getDoc(doc(db,'config','menu_hoy')).catch(e=>{
+      console.warn('config/menu_hoy read failed, trying public_config',e);
+      return null;
+    });
+    if(snap&&snap.exists())return snap.data();
+    const publicSnap=await getDoc(doc(db,'public_config','menu_hoy'));
+    return publicSnap.exists()?publicSnap.data():null;
+  }
+
+  async function signInWithGoogle(){
+    const result=await signInWithPopup(auth,googleProvider);
+    const user=result.user;
+    const clienteId='google_'+user.uid;
+    const previous=window.clubClient?window.clubClient():null;
+    const client={
+      nombre:user.displayName||previous?.nombre||'Cliente',
+      telefono:previous?.telefono||document.getElementById('cPhone')?.value||'',
+      telefonoId:previous?.telefonoId||'',
+      email:user.email||'',
+      cumple:previous?.cumple||'',
+      promos:true,
+      puntos:Number(previous?.puntos||0),
+      pedidos:Number(previous?.pedidos||0),
+      totalGastado:Number(previous?.totalGastado||0),
+      premiosCanjeados:Array.isArray(previous?.premiosCanjeados)?previous.premiosCanjeados:[]
+    };
+    await setDoc(doc(db,'clientes',clienteId),{
+      nombre:client.nombre,
+      telefono:client.telefono,
+      email:client.email,
+      googleUid:user.uid,
+      photoURL:user.photoURL||'',
+      datosReutilizables:{
+        nombre:client.nombre,
+        telefono:client.telefono,
+        email:client.email
+      },
+      fechaRegistro:serverTimestamp(),
+      ultimaActualizacion:serverTimestamp()
+    },{merge:true});
+    if(window.saveClubClient)window.saveClubClient(client);
+    const nameInput=document.getElementById('cName');
+    const emailInput=document.getElementById('cEmail');
+    if(nameInput&&!nameInput.value)nameInput.value=client.nombre;
+    if(emailInput&&!emailInput.value)emailInput.value=client.email;
+    localStorage.setItem('lc_sub_popup_closed','true');
+    toast('Sesión iniciada con Google');
+    return user;
+  }
+
+  window.lcFirebase={enabled:true,db,auth,saveOrderBundle,signInWithGoogle,updateOrderStatus:updateOrderStatusRemote,addPoints,listRecentOrders,saveMenuConfig,loadMenuConfig};
+  if(window.loadRemoteMenuState)window.loadRemoteMenuState().catch(e=>console.warn('remote menu load failed',e));
+}
+</script>
+</body>
+</html>
